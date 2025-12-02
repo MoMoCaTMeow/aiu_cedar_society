@@ -4,13 +4,13 @@ export default config({
     cloud: {
         project: 'aiu-cedar-society/aiucedarsociety',
     },
-    storage: process.env.NODE_ENV === 'production'
+    storage: process.env.NODE_ENV === 'development'
         ? {
-            kind: 'github',
-            repo: 'MoMoCaTMeow/aiu_cedar_society',
+            kind: 'local',
         }
         : {
-            kind: 'local',
+            kind: 'github',
+            repo: 'MoMoCaTMeow/aiu_cedar_society',
         },
     collections: {
         lectures: collection({
