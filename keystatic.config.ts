@@ -9,11 +9,7 @@ export default config({
             kind: 'local',
         }
         : {
-            kind: 'github',
-            repo: {
-                owner: 'MoMoCaTMeow',
-                name: 'aiu_cedar_society',
-            },
+            kind: 'cloud',
         },
     collections: {
         lectures: collection({
