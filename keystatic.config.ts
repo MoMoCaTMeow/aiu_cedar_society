@@ -1,9 +1,17 @@
 import { config, fields, collection } from '@keystatic/core';
 
 export default config({
-    storage: {
-        kind: 'local',
+    cloud: {
+        project: 'aiu-cedar-society/aiucedarsociety',
     },
+    storage: process.env.NODE_ENV === 'production'
+        ? {
+            kind: 'github',
+            repo: 'MoMoCaTMeow/aiu_cedar_society',
+        }
+        : {
+            kind: 'local',
+        },
     collections: {
         lectures: collection({
             label: '講演会 (Lectures)',
