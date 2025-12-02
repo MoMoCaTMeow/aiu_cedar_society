@@ -2,9 +2,9 @@ const isProd = process.env.NODE_ENV === 'production';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: isProd ? 'export' : undefined,
-  basePath: isProd ? '/aiu_cedar_society' : '',
-  trailingSlash: isProd,
+  // output: 'export', // Vercel handles this automatically (and supports API routes)
+  // basePath: '/aiu_cedar_society', // Vercel deploys to root
+  // trailingSlash: true, // Not strictly necessary for Vercel
   images: {
     unoptimized: true,
   },
