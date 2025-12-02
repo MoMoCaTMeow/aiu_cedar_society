@@ -2,9 +2,9 @@ const isProd = process.env.NODE_ENV === 'production';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: isProd ? 'export' : undefined,
   basePath: isProd ? '/aiu_cedar_society' : '',
-  trailingSlash: true,
+  trailingSlash: isProd,
   images: {
     unoptimized: true,
   },
