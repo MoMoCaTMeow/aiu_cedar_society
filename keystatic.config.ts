@@ -10,7 +10,10 @@ export default config({
         }
         : {
             kind: 'github',
-            repo: 'MoMoCaTMeow/aiu_cedar_society',
+            repo: {
+                owner: 'MoMoCaTMeow',
+                name: 'aiu_cedar_society',
+            },
         },
     collections: {
         lectures: collection({
