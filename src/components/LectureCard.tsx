@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface LectureProps {
@@ -18,10 +19,12 @@ export default function LectureCard({ slug, entry }: LectureProps) {
                 {/* Image Container */}
                 <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
                     {entry.coverImage ? (
-                        <img
+                        <Image
                             src={entry.coverImage}
                             alt={entry.title}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                     ) : (
                         <div className="w-full h-full flex items-center justify-center bg-[var(--color-cedar-green)] text-white/20">

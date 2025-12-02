@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { DocumentRenderer } from '@keystatic/core/renderer';
 import Link from "next/link";
 
+import Image from 'next/image';
+
 export async function generateStaticParams() {
     const lectures = await reader.collections.lectures.all();
     return lectures.map((lecture) => ({
@@ -35,15 +37,16 @@ export default async function LecturePage({ params }: { params: Promise<{ slug: 
     return (
         <div className="bg-[#F9F8F4] min-h-screen pb-20">
             {/* Hero / Header for the lecture */}
-            {/* Hero / Header for the lecture */}
             <div className="relative h-[50vh] min-h-[400px] flex items-end">
                 {/* Background Image with Overlay */}
                 <div className="absolute inset-0 z-0">
                     {lecture.coverImage ? (
-                        <img
+                        <Image
                             src={lecture.coverImage}
                             alt={lecture.title}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
+                            priority
                         />
                     ) : (
                         <div className="w-full h-full bg-[var(--color-cedar-green)] flex items-center justify-center">
