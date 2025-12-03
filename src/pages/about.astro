@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-  <div class="min-h-screen py-16 md:py-20 px-4 md:px-6">
-    <div class="container mx-auto max-w-3xl">
+  <div class="min-h-screen py-16 md:py-20 px-4 md:px-6 bg-gradient-to-b from-gray-50 to-white">
+    <div class="container mx-auto max-w-4xl">
+        {/* Back Button */}
         <a href="/" class="inline-flex items-center text-gray-500 hover:text-[#006837] mb-12 md:mb-16 transition-colors group text-sm font-medium min-h-[44px]">
             <svg class="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -12,39 +13,144 @@ import Layout from '../layouts/Layout.astro';
             トップに戻る
         </a>
     
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-10 md:mb-12 tracking-tight leading-tight">
-            AIU Cedar Society<br/>について
-        </h1>
-        
-        <div class="space-y-8 md:space-y-12 text-gray-700 leading-relaxed">
-            <p class="text-base md:text-lg">
-                AIU Cedar Societyは、2024年春に設立され、同年6月より本格始動した秋田国際教養大学（AIU）の公認学生団体です。
+        {/* Hero Section */}
+        <div class="relative mb-16 md:mb-20">
+            <div class="absolute top-0 left-0 w-px h-16 bg-[#006837]"></div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight leading-tight pl-6">
+                AIU Cedar Society<br class="hidden md:block"/><span class="text-[#006837]">について</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed pl-6 max-w-2xl">
+                秋田とAIU生の可能性をつなぐ、学生主導の公認団体
             </p>
-            <p class="text-base md:text-lg">
-                「秋田とAIU生の可能性をつなぐ」をミッションに掲げ、学生が持つ熱意や能力と、秋田社会との接点を創出することを目的としています。
-                多くの学生が卒業後に県外へ流出してしまう現状に対し、私たちは「秋田に残る」という選択肢が自然と生まれるような、魅力的な機会をこの地に作りたいと考えています。
-            </p>
-            
-            <div class="pt-6 md:pt-8">
-                <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 tracking-tight">活動ビジョン</h3>
-                <p class="text-sm md:text-base">
-                    私たちは「出会い・学び・実践」のサイクルを重視しています。
-                    著名なゲストを招いた講演会を通じて、学生に都市部と変わらない学びやネットワークの機会を提供し、
-                    そこから得たインスピレーションを秋田での実践へと繋げていきます。
+        </div>
+
+        {/* Mission Card */}
+        <div class="bg-white rounded-lg shadow-md p-8 md:p-10 mb-8 border-l-4 border-[#006837]">
+            <div class="flex items-start gap-4 mb-6">
+                <div class="w-6 h-6 bg-[#006837] bg-opacity-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-[#006837]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 tracking-tight">私たちのミッション</h2>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+                        AIU Cedar Societyは、2024年春に設立され、同年6月より本格始動した秋田国際教養大学（AIU）の公認学生団体です。
+                        「秋田とAIU生の可能性をつなぐ」をミッションに掲げ、学生が持つ熱意や能力と、秋田社会との接点を創出することを目的としています。
+                    </p>
+                </div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-6 mt-6">
+                <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+                    多くの学生が卒業後に県外へ流出してしまう現状に対し、私たちは「秋田に残る」という選択肢が自然と生まれるような、魅力的な機会をこの地に作りたいと考えています。
                 </p>
             </div>
+        </div>
 
-            <div class="pt-6 md:pt-8">
-                <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 tracking-tight">主な活動実績</h3>
-                <ul class="space-y-3 text-sm md:text-base">
-                    <li class="pl-3 md:pl-4 border-l-2 border-[#006837]">芦屋市長 高島崚輔氏による講演会（意思決定をテーマに開催）</li>
-                    <li class="pl-3 md:pl-4 border-l-2 border-[#006837]">AIU モンテ・カセム学長による講演会（グローバルリーダーシップとAIUの未来について）</li>
-                </ul>
+        {/* Vision Card */}
+        <div class="bg-white rounded-lg shadow-md p-8 md:p-10 mb-8">
+            <div class="flex items-start gap-4 mb-6">
+                <div class="w-6 h-6 bg-[#006837] bg-opacity-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-[#006837]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 tracking-tight">活動ビジョン</h2>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-6">
+                        私たちは「出会い・学び・実践」のサイクルを重視しています。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-gradient-to-br from-[#006837] to-[#005028] text-white rounded-lg p-5 shadow-sm">
+                            <div class="text-3xl font-bold mb-2">01</div>
+                            <div class="text-sm font-bold mb-1">出会い</div>
+                            <div class="text-xs opacity-90">著名なゲストとの<br/>対話の機会</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-[#006837] to-[#005028] text-white rounded-lg p-5 shadow-sm">
+                            <div class="text-3xl font-bold mb-2">02</div>
+                            <div class="text-sm font-bold mb-1">学び</div>
+                            <div class="text-xs opacity-90">都市部と変わらない<br/>学びの機会</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-[#006837] to-[#005028] text-white rounded-lg p-5 shadow-sm">
+                            <div class="text-3xl font-bold mb-2">03</div>
+                            <div class="text-sm font-bold mb-1">実践</div>
+                            <div class="text-xs opacity-90">秋田での<br/>アクション創出</div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="mt-16 md:mt-20 pt-8 md:pt-12 border-t border-gray-200 text-sm text-gray-500 space-y-2">
-                <p>代表: 木下 佑斗（AIU 4年）</p>
-                <p>設立: 2024年</p>
+        {/* Achievements Card */}
+        <div class="bg-white rounded-lg shadow-md p-8 md:p-10 mb-8">
+            <div class="flex items-start gap-4 mb-6">
+                <div class="w-6 h-6 bg-[#006837] bg-opacity-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-[#006837]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 tracking-tight">主な活動実績</h2>
+                    <div class="space-y-6">
+                        {/* Timeline Item 1 */}
+                        <div class="relative pl-8 border-l-2 border-gray-200 pb-6">
+                            <div class="absolute left-0 top-0 w-4 h-4 bg-[#006837] rounded-full -ml-[9px]"></div>
+                            <div class="bg-gray-50 rounded-lg p-5">
+                                <div class="text-xs text-[#006837] font-bold mb-2 tracking-wider">LECTURE EVENT</div>
+                                <h3 class="font-bold text-gray-900 text-base md:text-lg mb-2">
+                                    芦屋市長 高島崚輔氏による講演会
+                                </h3>
+                                <p class="text-sm text-gray-600">
+                                    意思決定をテーマに開催
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Timeline Item 2 */}
+                        <div class="relative pl-8 border-l-2 border-gray-200">
+                            <div class="absolute left-0 top-0 w-4 h-4 bg-[#006837] rounded-full -ml-[9px]"></div>
+                            <div class="bg-gray-50 rounded-lg p-5">
+                                <div class="text-xs text-[#006837] font-bold mb-2 tracking-wider">LECTURE EVENT</div>
+                                <h3 class="font-bold text-gray-900 text-base md:text-lg mb-2">
+                                    AIU モンテ・カセム学長による講演会
+                                </h3>
+                                <p class="text-sm text-gray-600">
+                                    グローバルリーダーシップとAIUの未来について
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {/* Organization Info Card */}
+        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-8 md:p-10 border border-gray-200">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="flex items-start gap-3">
+                    <div class="w-6 h-6 bg-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <svg class="w-4 h-4 text-[#006837]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 font-medium mb-1 tracking-wider uppercase">Representative</div>
+                        <div class="text-base font-bold text-gray-900">木下 佑斗</div>
+                        <div class="text-sm text-gray-600">AIU 4年</div>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="w-6 h-6 bg-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <svg class="w-4 h-4 text-[#006837]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 font-medium mb-1 tracking-wider uppercase">Established</div>
+                        <div class="text-base font-bold text-gray-900">2024年</div>
+                        <div class="text-sm text-gray-600">春季設立、6月本格始動</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
