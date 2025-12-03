@@ -15,11 +15,11 @@ const lectures = response.contents;
             <div class="relative">
                 <div class="absolute top-0 left-0 w-px h-16 bg-[#006837]"></div>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 tracking-tight leading-tight pl-6">
-                    秋田とAIU生の<br/>可能性を<span class="text-[#006837]">つなぐ</span>
+                    秋田とAIU生の可能性を<span class="text-[#006837]">つなぐ</span>
                 </h1>
                 <p class="text-base md:text-lg text-gray-600 leading-relaxed pl-6 max-w-2xl">
                     AIU Cedar Societyは、学生の熱意と秋田社会の架け橋となります。<br/>
-                    「出会い・学び・実践」のサイクルを創り出し、秋田の地で新たな価値を生み出すための講演会シリーズ。
+                    「出会い・学び・実践」のサイクルを創り出し、秋田の地で新たな価値を生み出していきます。
                 </p>
             </div>
         </div>
@@ -74,7 +74,7 @@ const lectures = response.contents;
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
                                         <div class="text-xs font-bold text-[#006837] tracking-wider uppercase">
-                                            {new Date(lecture.event_date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                            {new Date(lecture.event_date).toLocaleString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                                         </div>
                                     </div>
                                     <h3 class="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-4 group-hover:text-[#006837] transition-colors">

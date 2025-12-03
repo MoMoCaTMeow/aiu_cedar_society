@@ -45,9 +45,9 @@ if (!lecture) {
                 <svg class="w-4 h-4 text-[#006837]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
-                <span class="text-xs font-bold text-[#006837] tracking-wider uppercase">
-                    {new Date(lecture.event_date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })}
-                </span>
+                <div class="text-base md:text-lg font-bold text-[#006837] tracking-wide">
+                    {new Date(lecture.event_date).toLocaleString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: '2-digit', minute: '2-digit' })}
+                </div>
             </div>
 
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight tracking-tight">

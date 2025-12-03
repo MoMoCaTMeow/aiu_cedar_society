@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLectures } from '../../library/microcms';
+
+// Fetch all lectures (past events)
+const response = await getLectures({ fields: ["id", "title", "guest_name", "event_date", "eyecatch"], limit: 100 });
+const lectures = response.contents;
+---
+
+<Layout>
+  <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
+    <div class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-5xl">
+        {/* Back Button */}
+        <a href="/" class="inline-flex items-center text-gray-500 hover:text-[#006837] mb-8 md:mb-12 transition-colors group text-sm font-medium min-h-[44px]">
+            <svg class="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            トップに戻る
+        </a>
+
+        {/* Hero Section */}
+        <div class="relative mb-12 md:mb-16">
+            <div class="absolute top-0 left-0 w-px h-16 bg-[#006837]"></div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight leading-tight pl-6">
+                過去の<span class="text-[#006837]">講演会</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed pl-6 max-w-2xl">
+                これまでに開催した講演会のアーカイブ
+            </p>
+        </div>
+
+        {/* Past Events Grid */}
+        <div class="space-y-6">
+            {lectures.map((lecture) => (
+                <a href={`/lectures/${lecture.id}`} class="block group">
+                    <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#006837] hover:border-opacity-30">
+                        <div class="flex flex-col md:flex-row gap-0">
+                            {/* Image */}
+                            <div class="w-full md:w-1/4 flex-shrink-0 relative overflow-hidden bg-gray-100">
+                                <div class="aspect-[210/297]">
+                                    {lecture.eyecatch ? (
+                                        <img 
+                                            src={lecture.eyecatch.url} 
+                                            alt={lecture.title} 
+                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                                        />
+                                    ) : (
+                                        <div class="w-full h-full flex items-center justify-center text-gray-300">
+                                            <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                            </svg>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Content */}
+                            <div class="flex-1 p-6 md:p-8">
+                                <div class="inline-flex items-center gap-2 bg-white border border-gray-200 px-3 py-1.5 rounded-full mb-4 shadow-sm">
+                                    <svg class="w-3.5 h-3.5 text-[#006837]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                    <div class="text-xs font-bold text-[#006837] tracking-wider uppercase">
+                                        {new Date(lecture.event_date).toLocaleString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                                    </div>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#006837] transition-colors">
+                                    {lecture.title}
+                                </h3>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    登壇: {lecture.guest_name} 氏
+                                </p>
+                                <div class="flex items-center gap-2 text-sm font-bold text-[#006837]">
+                                    <span>詳しく見る</span>
+                                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            ))}
+        </div>
+    </div>
+  </div>
+</Layout>
