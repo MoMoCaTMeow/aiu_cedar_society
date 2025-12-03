@@ -1,0 +1,54 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>AIU Cedar Society</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+        <style is:global>
+            html {
+                scroll-behavior: smooth;
+            }
+            ::selection {
+                background-color: #006837;
+                color: white;
+            }
+        </style>
+	</head>
+	<body class="bg-gray-50 text-[#333333] font-sans antialiased min-h-screen flex flex-col tracking-wide font-normal selection:bg-[#006837] selection:text-white relative">
+        <header class="py-4 md:py-8 px-4 md:px-6 lg:px-12 fixed w-full top-0 z-50 transition-all duration-300 bg-gray-50/95 backdrop-blur-md border-b border-gray-200/50">
+            <div class="container mx-auto max-w-6xl flex justify-between items-center">
+                <a href="/" class="text-base md:text-lg font-bold tracking-wide text-gray-900 hover:text-[#006837] transition-colors min-h-[44px] flex items-center">
+                    AIU Cedar Society
+                </a>
+                <nav>
+                    <a href="/about" class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2">ABOUT</a>
+                </nav>
+            </div>
+        </header>
+		<main class="flex-grow pt-24">
+            <slot />
+        </main>
+        <footer class="py-12 px-6 border-t border-gray-200 bg-gray-50 text-center text-gray-500 text-xs tracking-widest relative z-10">
+            &copy; {new Date().getFullYear()} AIU Cedar Society.
+        </footer>
+	</body>
+</html>
+
+<style>
+    :root {
+        --font-sans: 'Noto Sans JP', sans-serif;
+        --color-aiu-green: #006837;
+    }
+    html {
+        font-family: var(--font-sans);
+    }
+</style>
