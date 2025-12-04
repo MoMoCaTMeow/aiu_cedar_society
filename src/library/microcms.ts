@@ -40,6 +40,7 @@ export type Member = {
   position: string;
   year: string;
   description: string;
+  status?: 'current' | 'graduate'; // 在校生 or 卒業生
   image?: MicroCMSImage;
 };
 
