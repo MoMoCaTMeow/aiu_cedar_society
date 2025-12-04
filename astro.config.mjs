@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://aiu-cedar-society-382b.vercel.app',
+  site: 'https://aiu-cedar-society.vercel.app',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()]
