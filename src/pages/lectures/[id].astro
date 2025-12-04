@@ -25,9 +25,22 @@ const lecture = response.contents[0];
 if (!lecture) {
   return Astro.redirect('/404');
 }
+
+// SEO
+const seo = {
+  title: `${lecture.title} - ${lecture.guest_name}氏 | AIU Cedar Society`,
+  description: `${lecture.guest_name}氏による講演会「${lecture.title}」。AIU Cedar Societyが主催する学生と社会をつなぐ講演会シリーズ。${new Date(lecture.event_date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}開催。`,
+  keywords: `${lecture.guest_name},${lecture.title},AIU Cedar Society,講演会,秋田国際教養大学,AIU,イベント`,
+  ogImage: lecture.eyecatch?.url || '/ogp-default.jpg',
+  ogType: 'article' as const,
+  article: {
+    publishedTime: lecture.event_date,
+    author: lecture.guest_name,
+  },
+};
 ---
 
-<Layout>
+<Layout seo={seo}>
   <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
     <div class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-4xl">
         {/* Back Button */}

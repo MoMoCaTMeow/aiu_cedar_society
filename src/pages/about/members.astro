@@ -5,9 +5,16 @@ import { getMembers } from '../../library/microcms';
 // Fetch members
 const response = await getMembers();
 const members = response.contents;
+
+// SEO
+const seo = {
+  title: 'メンバー紹介 | AIU Cedar Society',
+  description: 'AIU Cedar Societyを支えるメンバーたちを紹介します。代表をはじめ、企画・運営・広報など様々な役割でメンバーが活動しています。',
+  keywords: 'AIU Cedar Society,メンバー,代表,運営メンバー,学生',
+};
 ---
 
-<Layout>
+<Layout seo={seo}>
   <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
     <div class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-5xl">
         {/* Back Button */}

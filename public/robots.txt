@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://aiu-cedar-society-382b.vercel.app/sitemap-index.xml

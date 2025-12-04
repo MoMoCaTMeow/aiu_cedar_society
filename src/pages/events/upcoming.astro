@@ -5,9 +5,16 @@ import { getUpcomingEvents } from '../../library/microcms';
 // Fetch upcoming events
 const response = await getUpcomingEvents();
 const events = response.contents;
+
+// SEO
+const seo = {
+  title: '今後の予定 | AIU Cedar Society',
+  description: 'AIU Cedar Societyが主催する今後の講演会・イベント情報。著名なゲストを招いた講演会など、最新情報をお届けします。',
+  keywords: 'AIU Cedar Society,今後の予定,イベント,講演会,開催情報',
+};
 ---
 
-<Layout>
+<Layout seo={seo}>
   <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
     <div class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-4xl">
         {/* Back Button */}

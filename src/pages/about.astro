@@ -4,9 +4,16 @@ import { getPages } from '../library/microcms';
 
 // Fetch pages content
 const pages = await getPages();
+
+// SEO
+const seo = {
+  title: 'AIU Cedar Societyについて | AIU Cedar Society',
+  description: 'AIU Cedar Societyは、2024年春に設立された秋田国際教養大学の学生主導の公認団体です。秋田とAIU生の可能性をつなぐことをミッションに、講演会を通じて「出会い・学び・実践」のサイクルを創り出します。',
+  keywords: 'AIU Cedar Society,秋田国際教養大学,学生団体,設立,ミッション,活動内容',
+};
 ---
 
-<Layout>
+<Layout seo={seo}>
   <div class="min-h-screen py-16 md:py-20 px-4 md:px-6 bg-gradient-to-b from-gray-50 to-white">
     <div class="container mx-auto max-w-4xl">
         {/* Back Button */}

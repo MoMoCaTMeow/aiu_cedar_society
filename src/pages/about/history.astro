@@ -4,9 +4,16 @@ import { getPages } from '../../library/microcms';
 
 // Fetch history content
 const pages = await getPages();
+
+// SEO
+const seo = {
+  title: '設立の経緯 | AIU Cedar Society',
+  description: 'AIU Cedar Societyが生まれた背景と、その想い。2024年春、数名のAIU学生が集まり、「秋田とAIU生の可能性をつなぐ」というミッションのもと団体を設立しました。',
+  keywords: 'AIU Cedar Society,設立の経緯,歴史,背景,ミッション',
+};
 ---
 
-<Layout>
+<Layout seo={seo}>
   <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
     <div class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-4xl">
         {/* Back Button */}

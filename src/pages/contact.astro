@@ -1,8 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// SEO
+const seo = {
+  title: 'お問い合わせ | AIU Cedar Society',
+  description: 'AIU Cedar Societyへのお問い合わせはこちらから。講演会のお申し込みやご質問など、お気軽にご連絡ください。',
+  keywords: 'AIU Cedar Society,お問い合わせ,連絡先,講演会申し込み',
+};
 ---
 
-<Layout>
+<Layout seo={seo}>
   <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
     <div class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-3xl">
         {/* Back Button */}

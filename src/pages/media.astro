@@ -5,9 +5,16 @@ import { getMediaCoverage } from '../library/microcms';
 // Fetch media coverage
 const response = await getMediaCoverage();
 const mediaCoverage = response.contents;
+
+// SEO
+const seo = {
+  title: 'メディア掲載 | AIU Cedar Society',
+  description: 'AIU Cedar Societyの新聞・雑誌・ウェブメディアでの掲載情報。秋田魁新報など、地元メディアでの取り上げを紹介します。',
+  keywords: 'AIU Cedar Society,メディア掲載,プレス,取材,新聞',
+};
 ---
 
-<Layout>
+<Layout seo={seo}>
   <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
     <div class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-4xl">
         {/* Back Button */}
