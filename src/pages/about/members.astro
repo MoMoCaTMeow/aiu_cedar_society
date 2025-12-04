@@ -6,9 +6,33 @@ import { getMembers } from '../../library/microcms';
 const response = await getMembers();
 const members = response.contents;
 
-// Group members by status
-const currentMembers = members.filter(m => m.status === 'current' || !m.status); // デフォルトは在校生
-const graduateMembers = members.filter(m => m.status === 'graduate');
+// デバッグ: データを確認
+console.log('=== メンバーデータ確認 ===');
+console.log('総メンバー数:', members.length);
+members.forEach((m, i) => {
+    console.log(`メンバー${i + 1}:`, m.name, '/ status:', m.status || '未設定');
+});
+
+// Group members by status (配列対応)
+const getStatus = (member: any) => {
+    if (!member.status) return null;
+    // 配列の場合は最初の要素を取得、文字列の場合はそのまま
+    return Array.isArray(member.status) ? member.status[0] : member.status;
+};
+
+const currentMembers = members.filter(m => {
+    const status = getStatus(m);
+    return status === 'current' || !status; // デフォルトは在校生
+});
+
+const graduateMembers = members.filter(m => {
+    const status = getStatus(m);
+    return status === 'graduate';
+});
+
+console.log('在校生:', currentMembers.length, '名');
+console.log('卒業生:', graduateMembers.length, '名');
+
 
 // SEO
 const seo = {
