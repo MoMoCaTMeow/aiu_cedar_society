@@ -41,6 +41,11 @@ const seo = {
 ---
 
 <Layout seo={seo}>
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress-container">
+    <div class="reading-progress-bar"></div>
+  </div>
+  
   <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
     <div class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-4xl">
         {/* Back Button */}
@@ -86,7 +91,9 @@ const seo = {
                         <div class="aspect-[210/297] w-full bg-gray-100">
                             <img 
                                 src={lecture.eyecatch.url} 
-                                alt={lecture.title} 
+                                alt={lecture.title}
+                                loading="lazy"
+                                decoding="async"
                                 class="w-full h-full object-cover" 
                             />
                         </div>
@@ -139,3 +146,38 @@ const seo = {
     </div>
   </div>
 </Layout>
+
+<style>
+/* Reading Progress Bar Styles */
+.reading-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.05);
+  z-index: 9999;
+}
+
+.reading-progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #006837, #00A84F);
+  width: 0%;
+  transition: width 0.1s ease-out;
+}
+</style>
+
+<script>
+// Reading Progress Bar
+window.addEventListener('scroll', function() {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  
+  const progressBar = document.querySelector('.reading-progress-bar') as HTMLElement;
+  if (progressBar) {
+    progressBar.style.width = scrolled + '%';
+  }
+}, { passive: true });
+</script>
+```

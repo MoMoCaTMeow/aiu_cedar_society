@@ -67,7 +67,7 @@ const seo = {
                     class="lecture-card block group"
                     style={`animation-delay: ${index * 100}ms`}
                 >
-                    <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden border border-gray-200 hover:border-[#006837]/30 transform hover:-translate-y-2">
+                    <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden border border-gray-200 hover:border-[#006837]/30 transform hover:-translate-y-2 hover:scale-[1.02]">
                         {/* Thumbnail - 縦型画像対応 */}
                         {lecture.eyecatch && (
                             <div class="w-full aspect-[3/4] overflow-hidden relative bg-gray-100">
@@ -75,6 +75,8 @@ const seo = {
                                 <img 
                                     src={lecture.eyecatch.url} 
                                     alt={lecture.title}
+                                    loading={index === 0 ? "eager" : "lazy"}
+                                    decoding="async"
                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                                 />
                             </div>
