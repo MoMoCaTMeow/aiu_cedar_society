@@ -6,6 +6,19 @@ import { getLectures } from '../../library/microcms';
 const response = await getLectures({ fields: ["id", "title", "guest_name", "event_date", "eyecatch"], limit: 100 });
 const lectures = response.contents;
 
+// Group lectures by year
+const lecturesByYear = lectures.reduce((acc, lecture) => {
+    const year = new Date(lecture.event_date).getFullYear();
+    if (!acc[year]) {
+        acc[year] = [];
+    }
+    acc[year].push(lecture);
+    return acc;
+}, {} as Record<number, typeof lectures>);
+
+// Sort years descending
+const years = Object.keys(lecturesByYear).map(Number).sort((a, b) => b - a);
+
 // SEO
 const seo = {
   title: '過去の講演会 | AIU Cedar Society',
@@ -38,67 +51,86 @@ const seo = {
             </p>
         </div>
 
-        {/* Past Events - Compact Grid */}
-        <div class="space-y-4 md:space-y-6">
-            {lectures.map((lecture) => (
-                <a href={`/lectures/${lecture.id}`} class="block group">
-                    <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#006837] hover:border-opacity-30 transform hover:-translate-y-0.5">
-                        <div class="flex flex-row gap-0">
-                            {/* Image - モバイルでも横並び、サイズを小さく */}
-                            <div class="w-24 sm:w-32 md:w-48 flex-shrink-0 relative overflow-hidden bg-gray-100">
-                                <div class="aspect-[3/4] md:aspect-[210/297]">
-                                    {lecture.eyecatch ? (
-                                        <img 
-                                            src={lecture.eyecatch.url} 
-                                            alt={lecture.title} 
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                                        />
-                                    ) : (
-                                        <div class="w-full h-full flex items-center justify-center text-gray-300">
-                                            <svg class="w-8 h-8 md:w-12 md:h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        {/* Past Events - Grouped by Year */}
+        {years.map((year) => (
+            <div class="mb-16 md:mb-20">
+                {/* Year Header */}
+                <div class="flex items-center gap-4 mb-6 md:mb-8">
+                    <div class="flex items-center gap-3">
+                        <div class="w-1 h-8 bg-[#006837] rounded-full"></div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+                            {year}<span class="text-[#006837]">年</span>
+                        </h2>
+                    </div>
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                    <span class="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                        {lecturesByYear[year].length}件
+                    </span>
+                </div>
+
+                {/* Lectures for this year */}
+                <div class="space-y-4 md:space-y-6">
+                    {lecturesByYear[year].map((lecture) => (
+                        <a href={`/lectures/${lecture.id}`} class="block group">
+                            <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#006837] hover:border-opacity-30 transform hover:-translate-y-0.5">
+                                <div class="flex flex-row gap-0">
+                                    {/* Image - モバイルでも横並び、サイズを小さく */}
+                                    <div class="w-24 sm:w-32 md:w-48 flex-shrink-0 relative overflow-hidden bg-gray-100">
+                                        <div class="aspect-[3/4] md:aspect-[210/297]">
+                                            {lecture.eyecatch ? (
+                                                <img 
+                                                    src={lecture.eyecatch.url} 
+                                                    alt={lecture.title} 
+                                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                                />
+                                            ) : (
+                                                <div class="w-full h-full flex items-center justify-center text-gray-300">
+                                                    <svg class="w-8 h-8 md:w-12 md:h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                                    </svg>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Content - コンパクトに */}
+                                    <div class="flex-1 p-4 md:p-6 flex flex-col justify-center min-h-0">
+                                        {/* Date Badge - 小さく */}
+                                        <div class="inline-flex items-center gap-1.5 w-fit bg-gray-50 border border-gray-200 px-2 py-1 rounded-full mb-2 md:mb-3">
+                                            <svg class="w-3 h-3 text-[#006837]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                            </svg>
+                                            <div class="text-xs font-medium text-gray-600">
+                                                {new Date(lecture.event_date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' })}
+                                            </div>
+                                        </div>
+                                        
+                                        {/* Title - 2行まで */}
+                                        <h3 class="text-base md:text-xl font-bold text-gray-900 mb-1.5 md:mb-2 group-hover:text-[#006837] transition-colors line-clamp-2">
+                                            {lecture.title}
+                                        </h3>
+                                        
+                                        {/* Guest - 簡潔に */}
+                                        <p class="text-xs md:text-sm text-gray-600 mb-2 md:mb-3 line-clamp-1">
+                                            {lecture.guest_name} 氏
+                                        </p>
+                                        
+                                        {/* View Details - 小さく */}
+                                        <div class="flex items-center gap-1.5 text-xs md:text-sm font-medium text-[#006837]">
+                                            <span class="hidden sm:inline">詳しく見る</span>
+                                            <span class="sm:hidden">詳細</span>
+                                            <svg class="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                             </svg>
                                         </div>
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* Content - コンパクトに */}
-                            <div class="flex-1 p-4 md:p-6 flex flex-col justify-center min-h-0">
-                                {/* Date Badge - 小さく */}
-                                <div class="inline-flex items-center gap-1.5 w-fit bg-gray-50 border border-gray-200 px-2 py-1 rounded-full mb-2 md:mb-3">
-                                    <svg class="w-3 h-3 text-[#006837]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                    </svg>
-                                    <div class="text-xs font-medium text-gray-600">
-                                        {new Date(lecture.event_date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' })}
                                     </div>
                                 </div>
-                                
-                                {/* Title - 2行まで */}
-                                <h3 class="text-base md:text-xl font-bold text-gray-900 mb-1.5 md:mb-2 group-hover:text-[#006837] transition-colors line-clamp-2">
-                                    {lecture.title}
-                                </h3>
-                                
-                                {/* Guest - 簡潔に */}
-                                <p class="text-xs md:text-sm text-gray-600 mb-2 md:mb-3 line-clamp-1">
-                                    {lecture.guest_name} 氏
-                                </p>
-                                
-                                {/* View Details - 小さく */}
-                                <div class="flex items-center gap-1.5 text-xs md:text-sm font-medium text-[#006837]">
-                                    <span class="hidden sm:inline">詳しく見る</span>
-                                    <span class="sm:hidden">詳細</span>
-                                    <svg class="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                                    </svg>
-                                </div>
                             </div>
-                        </div>
-                    </div>
-                </a>
-            ))}
-        </div>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        ))}
     </div>
   </div>
 </Layout>
