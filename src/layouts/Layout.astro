@@ -98,42 +98,114 @@ const { seo = {} } = Astro.props;
                 transition: background-color 0.3s ease, color 0.3s ease;
             }
             
-            /* Dark Mode Card Styles */
+            /* Comprehensive Dark Mode Styles */
+            
+            /* Background Colors */
             [data-theme="dark"] .bg-white {
-                background-color: #1f2937;
+                background-color: #1f2937 !important;
             }
             
             [data-theme="dark"] .bg-gray-50 {
-                background-color: #111827;
+                background-color: #111827 !important;
             }
             
             [data-theme="dark"] .bg-gray-100 {
-                background-color: #374151;
+                background-color: #374151 !important;
             }
             
-            [data-theme="dark"] .text-gray-900 {
-                color: #f9fafb;
+            [data-theme="dark"] .bg-gradient-to-b {
+                background-image: linear-gradient(to bottom, #111827, #1f2937) !important;
+            }
+            
+            [data-theme="dark"] .bg-\[\#006837\] {
+                background-color: #00A84F !important;
+            }
+            
+            /* Text Colors - High Contrast */
+            [data-theme="dark"] .text-gray-900,
+            [data-theme="dark"] .text-gray-800,
+            [data-theme="dark"] .text-gray-700 {
+                color: #f9fafb !important;
             }
             
             [data-theme="dark"] .text-gray-600 {
-                color: #d1d5db;
+                color: #e5e7eb !important;
             }
             
             [data-theme="dark"] .text-gray-500 {
-                color: #9ca3af;
+                color: #d1d5db !important;
             }
             
+            [data-theme="dark"] .text-gray-400 {
+                color: #9ca3af !important;
+            }
+            
+            [data-theme="dark"] .text-gray-300 {
+                color: #6b7280 !important;
+            }
+            
+            /* Links */
+            [data-theme="dark"] a:not(.bg-\[\#006837\]):not(.bg-black):not(.bg-gradient-to-r) {
+                color: #e5e7eb;
+            }
+            
+            [data-theme="dark"] a:hover {
+                color: #00D26A;
+            }
+            
+            /* Borders */
             [data-theme="dark"] .border-gray-200,
             [data-theme="dark"] .border-gray-100 {
-                border-color: #374151;
+                border-color: #374151 !important;
+            }
+            
+            [data-theme="dark"] .border-t,
+            [data-theme="dark"] .border-b {
+                border-color: #374151 !important;
+            }
+            
+            /* Shadows */
+            [data-theme="dark"] .shadow-sm {
+                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5) !important;
             }
             
             [data-theme="dark"] .shadow-md {
-                box-shadow: var(--shadow-md);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.6) !important;
             }
             
             [data-theme="dark"] .shadow-lg {
-                box-shadow: var(--shadow-lg);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.7) !important;
+            }
+            
+            [data-theme="dark"] .shadow-xl {
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.8) !important;
+            }
+            
+            /* Header */
+            [data-theme="dark"] header {
+                background-color: #1f2937;
+                border-bottom-color: #374151;
+            }
+            
+            /* Footer */
+            [data-theme="dark"] footer {
+                background-color: #111827 !important;
+                border-top-color: #374151 !important;
+            }
+            
+            /* Hover States */
+            [data-theme="dark"] .hover\:bg-gray-50:hover {
+                background-color: #374151 !important;
+            }
+            
+            [data-theme="dark"] .hover\:text-\[\#006837\]:hover {
+                color: #00D26A !important;
+            }
+            
+            /* Dropdown Menus */
+            [data-theme="dark"] .dropdown-menu {
+                background-color: #1f2937 !important;
+                border-color: #374151 !important;
             }
             
             /* Font Display Optimization */
