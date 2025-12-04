@@ -68,9 +68,9 @@ const seo = {
                     style={`animation-delay: ${index * 100}ms`}
                 >
                     <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden border border-gray-200 hover:border-[#006837]/30 transform hover:-translate-y-2">
-                        {/* Thumbnail - 縦配置 */}
+                        {/* Thumbnail - 縦型画像対応 */}
                         {lecture.eyecatch && (
-                            <div class="w-full aspect-[16/9] overflow-hidden relative bg-gray-100">
+                            <div class="w-full aspect-[3/4] overflow-hidden relative bg-gray-100">
                                 <div class="absolute inset-0 bg-gradient-to-br from-[#006837]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                                 <img 
                                     src={lecture.eyecatch.url} 
