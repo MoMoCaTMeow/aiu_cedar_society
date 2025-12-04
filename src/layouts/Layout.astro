@@ -55,14 +55,14 @@ const { seo = {} } = Astro.props;
                 </a>
                 <nav class="flex items-center gap-2 md:gap-4">
                 {/* About Dropdown */}
-                <div class="relative group">
-                    <button class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3 gap-1">
+                <div class="relative dropdown-container">
+                    <button class="dropdown-button text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3 gap-1">
                         ABOUT
-                        <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="dropdown-icon w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div class="absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div class="dropdown-menu absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible transition-all duration-200 z-50">
                         <a href="/about" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors border-b border-gray-100">私たちについて</a>
                         <a href="/about/history" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors border-b border-gray-100">設立の経緯</a>
                         <a href="/about/members" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors rounded-b-lg">メンバー紹介</a>
@@ -70,14 +70,14 @@ const { seo = {} } = Astro.props;
                 </div>
 
                 {/* Events Dropdown */}
-                <div class="relative group">
-                    <button class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3 gap-1">
+                <div class="relative dropdown-container">
+                    <button class="dropdown-button text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3 gap-1">
                         EVENTS
-                        <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="dropdown-icon w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div class="absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div class="dropdown-menu absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible transition-all duration-200 z-50">
                         <a href="/events/upcoming" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors border-b border-gray-100 rounded-t-lg">今後の予定</a>
                         <a href="/events/past" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors rounded-b-lg">過去の講演会</a>
                     </div>
@@ -108,4 +108,71 @@ const { seo = {} } = Astro.props;
     html {
         font-family: var(--font-sans);
     }
+    
+    /* Desktop hover support */
+    @media (hover: hover) {
+        .dropdown-container:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+        .dropdown-container:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+    }
+    
+    /* Active dropdown state */
+    .dropdown-container.active .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+    }
+    .dropdown-container.active .dropdown-icon {
+        transform: rotate(180deg);
+    }
 </style>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdownContainers = document.querySelectorAll('.dropdown-container');
+        
+        dropdownContainers.forEach(container => {
+            const button = container.querySelector('.dropdown-button');
+            const menu = container.querySelector('.dropdown-menu');
+            
+            // Toggle dropdown on button click (for mobile and desktop)
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Close all other dropdowns
+                dropdownContainers.forEach(otherContainer => {
+                    if (otherContainer !== container) {
+                        otherContainer.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current dropdown
+                container.classList.toggle('active');
+            });
+            
+            // Prevent dropdown from closing when clicking inside menu
+            menu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function() {
+            dropdownContainers.forEach(container => {
+                container.classList.remove('active');
+            });
+        });
+        
+        // Close dropdowns on navigation (when clicking a link inside dropdown)
+        document.querySelectorAll('.dropdown-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                dropdownContainers.forEach(container => {
+                    container.classList.remove('active');
+                });
+            });
+        });
+    });
+</script>
