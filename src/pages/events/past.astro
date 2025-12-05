@@ -176,11 +176,18 @@ const seo = {
                                                 <div class="aspect-[3/4] md:aspect-[210/297]">
                                                     {lecture.eyecatch ? (
                                                         <img
-                                                            src={`${lecture.eyecatch.url}?w=200&fm=webp&q=80`}
-                                                            srcset={`${lecture.eyecatch.url}?w=200&fm=webp&q=80 1x, ${lecture.eyecatch.url}?w=400&fm=webp&q=80 2x`}
+                                                            src={`${lecture.eyecatch.url}?w=192&fm=webp&q=80`}
+                                                            srcset={`
+                                                        ${lecture.eyecatch.url}?w=96&fm=webp&q=80 96w,
+                                                        ${lecture.eyecatch.url}?w=128&fm=webp&q=80 128w,
+                                                        ${lecture.eyecatch.url}?w=192&fm=webp&q=80 192w,
+                                                        ${lecture.eyecatch.url}?w=256&fm=webp&q=80 256w,
+                                                        ${lecture.eyecatch.url}?w=384&fm=webp&q=80 384w
+                                                    `}
+                                                            sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 192px"
                                                             alt={lecture.title}
-                                                            width="200"
-                                                            height="267"
+                                                            width="192"
+                                                            height="256"
                                                             loading="lazy"
                                                             decoding="async"
                                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
