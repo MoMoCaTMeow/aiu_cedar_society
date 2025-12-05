@@ -9,6 +9,7 @@ export type Lecture = {
   revisedAt: string;
   title: string;
   guest_name: string;
+  belonging?: string; // Speaker's organization/affiliation
   event_date: string;
   eyecatch?: MicroCMSImage;
   content?: string;

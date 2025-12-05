@@ -21,7 +21,15 @@ if (!id) {
 // Fetch the lecture data using filters
 const response = await getLectures({
   filters: `id[equals]${id}`,
-  fields: ["id", "title", "guest_name", "event_date", "eyecatch", "content"],
+  fields: [
+    "id",
+    "title",
+    "guest_name",
+    "belonging",
+    "event_date",
+    "eyecatch",
+    "content",
+  ],
 });
 const lecture = response.contents[0];
 
@@ -143,6 +151,13 @@ const seo = {
             <div class="text-lg md:text-xl font-bold text-gray-900">
               {lecture.guest_name}
             </div>
+            {
+              lecture.belonging && (
+                <div class="text-sm text-gray-600 mt-1">
+                  {lecture.belonging}
+                </div>
+              )
+            }
           </div>
         </div>
 
