@@ -4,17 +4,17 @@ import SEO from "../components/SEO.astro";
 import SchemaOrganization from "../components/SchemaOrganization.astro";
 
 interface Props {
-  seo?: {
-    title?: string;
-    description?: string;
-    keywords?: string;
-    ogImage?: string;
-    ogType?: 'website' | 'article';
-    article?: {
-      publishedTime?: string;
-      author?: string;
+    seo?: {
+        title?: string;
+        description?: string;
+        keywords?: string;
+        ogImage?: string;
+        ogType?: "website" | "article";
+        article?: {
+            publishedTime?: string;
+            author?: string;
+        };
     };
-  };
 }
 
 const { seo = {} } = Astro.props;
@@ -22,43 +22,56 @@ const { seo = {} } = Astro.props;
 
 <!doctype html>
 <html lang="ja">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		
-		<!-- Favicons -->
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<link rel="manifest" href="/site.webmanifest" />
-		
-		<meta name="generator" content={Astro.generator} />
-		
-		<!-- SEO Meta Tags -->
-		<SEO {...seo} />
-		
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+
+        <!-- Favicons -->
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="112x112"
+            href="/favicon-32x32.png"
+        />
+        <link rel="apple-touch-icon" href="/favicon-32x32.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+
+        <meta name="generator" content={Astro.generator} />
+
+        <!-- SEO Meta Tags -->
+        <SEO {...seo} />
+
         <!-- Font Optimization -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link 
-			rel="preload" 
-			href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" 
-			as="style"
-			onload="this.onload=null;this.rel='stylesheet'"
-		>
-		<noscript>
-			<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-		</noscript>
-		
-		<!-- Google Analytics 4 -->
-		<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-850X7KS6F5"></script>
-		<script is:inline>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'G-850X7KS6F5');
-		</script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="preload"
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript>
+            <link
+                href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap"
+                rel="stylesheet"
+            />
+        </noscript>
+
+        <!-- Google Analytics 4 -->
+        <script
+            is:inline
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-850X7KS6F5"
+        ></script>
+        <script is:inline>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-850X7KS6F5");
+        </script>
         <style is:global>
             /* CSS Variables for Dark Mode */
             :root {
@@ -76,7 +89,7 @@ const { seo = {} } = Astro.props;
                 --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
                 --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             }
-            
+
             [data-theme="dark"] {
                 --bg-primary: #1f2937;
                 --bg-secondary: #111827;
@@ -92,145 +105,152 @@ const { seo = {} } = Astro.props;
                 --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
                 --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
             }
-            
+
             html {
                 scroll-behavior: smooth;
                 background-color: var(--bg-primary);
                 transition: background-color 0.3s ease;
             }
-            
+
             body {
                 background-color: var(--bg-primary);
                 color: var(--text-primary);
-                transition: background-color 0.3s ease, color 0.3s ease;
+                transition:
+                    background-color 0.3s ease,
+                    color 0.3s ease;
             }
-            
+
             /* Comprehensive Dark Mode Styles */
-            
+
             /* Background Colors */
             [data-theme="dark"] .bg-white {
                 background-color: #1f2937 !important;
             }
-            
+
             [data-theme="dark"] .bg-gray-50 {
                 background-color: #111827 !important;
             }
-            
+
             [data-theme="dark"] .bg-gray-100 {
                 background-color: #374151 !important;
             }
-            
+
             [data-theme="dark"] .bg-gradient-to-b {
-                background-image: linear-gradient(to bottom, #111827, #1f2937) !important;
+                background-image: linear-gradient(
+                    to bottom,
+                    #111827,
+                    #1f2937
+                ) !important;
             }
-            
+
             [data-theme="dark"] .bg-\[\#006837\] {
-                background-color: #00A84F !important;
+                background-color: #00a84f !important;
             }
-            
+
             /* Text Colors - High Contrast */
             [data-theme="dark"] .text-gray-900,
             [data-theme="dark"] .text-gray-800,
             [data-theme="dark"] .text-gray-700 {
                 color: #f9fafb !important;
             }
-            
+
             [data-theme="dark"] .text-gray-600 {
                 color: #e5e7eb !important;
             }
-            
+
             [data-theme="dark"] .text-gray-500 {
                 color: #d1d5db !important;
             }
-            
+
             [data-theme="dark"] .text-gray-400 {
                 color: #9ca3af !important;
             }
-            
+
             [data-theme="dark"] .text-gray-300 {
                 color: #6b7280 !important;
             }
-            
+
             /* Links */
-            [data-theme="dark"] a:not(.bg-\[\#006837\]):not(.bg-black):not(.bg-gradient-to-r) {
+            [data-theme="dark"]
+                a:not(.bg-\[\#006837\]):not(.bg-black):not(.bg-gradient-to-r) {
                 color: #e5e7eb;
             }
-            
+
             [data-theme="dark"] a:hover {
-                color: #00D26A;
+                color: #00d26a;
             }
-            
+
             /* Borders */
             [data-theme="dark"] .border-gray-200,
             [data-theme="dark"] .border-gray-100 {
                 border-color: #374151 !important;
             }
-            
+
             [data-theme="dark"] .border-t,
             [data-theme="dark"] .border-b {
                 border-color: #374151 !important;
             }
-            
+
             /* Shadows */
             [data-theme="dark"] .shadow-sm {
                 box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5) !important;
             }
-            
+
             [data-theme="dark"] .shadow-md {
                 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.6) !important;
             }
-            
+
             [data-theme="dark"] .shadow-lg {
                 box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.7) !important;
             }
-            
+
             [data-theme="dark"] .shadow-xl {
                 box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.8) !important;
             }
-            
+
             /* Header */
             [data-theme="dark"] header {
                 background-color: #1f2937;
                 border-bottom-color: #374151;
             }
-            
+
             /* Footer */
             [data-theme="dark"] footer {
                 background-color: #111827 !important;
                 border-top-color: #374151 !important;
             }
-            
+
             /* Hover States */
             [data-theme="dark"] .hover\:bg-gray-50:hover {
                 background-color: #374151 !important;
             }
-            
+
             [data-theme="dark"] .hover\:text-\[\#006837\]:hover {
-                color: #00D26A !important;
+                color: #00d26a !important;
             }
-            
+
             /* Dropdown Menus */
             [data-theme="dark"] .dropdown-menu {
                 background-color: #1f2937 !important;
                 border-color: #374151 !important;
             }
-            
+
             /* Font Display Optimization */
             @font-face {
-                font-family: 'Noto Sans JP';
+                font-family: "Noto Sans JP";
                 font-display: swap;
             }
-            
+
             /* CSS Containment for Performance */
             .lecture-card,
             .event-card {
                 contain: layout style paint;
             }
-            
+
             .container {
                 contain: layout;
             }
-            
+
             /* Focus Enhancement for Keyboard Navigation */
             a:focus-visible,
             button:focus-visible,
@@ -241,13 +261,13 @@ const { seo = {} } = Astro.props;
                 outline-offset: 2px;
                 border-radius: 4px;
             }
-            
+
             /* Remove outline for mouse users */
             a:focus:not(:focus-visible),
             button:focus:not(:focus-visible) {
                 outline: none;
             }
-            
+
             /* Skeleton Loading Animation */
             @keyframes skeleton-loading {
                 0% {
@@ -257,7 +277,7 @@ const { seo = {} } = Astro.props;
                     background-position: calc(200px + 100%) 0;
                 }
             }
-            
+
             .skeleton {
                 background-color: #e0e0e0;
                 background-image: linear-gradient(
@@ -270,7 +290,7 @@ const { seo = {} } = Astro.props;
                 background-repeat: no-repeat;
                 animation: skeleton-loading 1.2s ease-in-out infinite;
             }
-            
+
             [data-theme="dark"] .skeleton {
                 background-color: #374151;
                 background-image: linear-gradient(
@@ -280,23 +300,23 @@ const { seo = {} } = Astro.props;
                     #374151 80px
                 );
             }
-            
+
             .skeleton-text {
                 height: 1rem;
                 margin-bottom: 0.5rem;
                 border-radius: 0.25rem;
             }
-            
+
             .skeleton-text.short {
                 width: 60%;
             }
-            
+
             .skeleton-image {
                 width: 100%;
                 aspect-ratio: 3/4;
                 border-radius: 0.5rem 0.5rem 0 0;
             }
-            
+
             /* Toast Notifications */
             .toast-container {
                 position: fixed;
@@ -307,7 +327,7 @@ const { seo = {} } = Astro.props;
                 flex-direction: column;
                 gap: 12px;
             }
-            
+
             .toast {
                 min-width: 300px;
                 max-width: 400px;
@@ -322,37 +342,37 @@ const { seo = {} } = Astro.props;
                 opacity: 0;
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
-            
+
             .toast.show {
                 transform: translateX(0);
                 opacity: 1;
             }
-            
+
             .toast-success {
                 border-left: 4px solid #10b981;
             }
-            
+
             .toast-error {
                 border-left: 4px solid #ef4444;
             }
-            
+
             .toast-info {
                 border-left: 4px solid #3b82f6;
             }
-            
+
             .toast-icon {
                 flex-shrink: 0;
                 width: 20px;
                 height: 20px;
             }
-            
+
             .toast-message {
                 flex: 1;
                 font-size: 14px;
                 line-height: 1.5;
                 color: #1f2937;
             }
-            
+
             [data-theme="dark"] .toast {
                 background: #1f2937;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -360,180 +380,310 @@ const { seo = {} } = Astro.props;
             [data-theme="dark"] .toast-message {
                 color: #f9fafb;
             }
-            
+
             /* Feedback Button Animation */
             @keyframes pulse-slow {
-                0%, 100% {
+                0%,
+                100% {
                     opacity: 1;
                 }
                 50% {
                     opacity: 0.85;
                 }
             }
-            
+
             .animate-pulse-slow {
                 animation: pulse-slow 3s ease-in-out infinite;
             }
-            
+
             #feedback-button:hover {
                 animation: none;
             }
-            
+
             ::selection {
                 background-color: #006837;
                 color: white;
             }
         </style>
-		
-		<!-- Structured Data -->
-		<SchemaOrganization />
-	</head>
-	<body class="bg-gray-50 text-[#333333] font-sans antialiased min-h-screen flex flex-col tracking-wide font-normal selection:bg-[#006837] selection:text-white relative">
-        <header class="py-4 md:py-8 px-4 md:px-6 lg:px-12 fixed w-full top-0 z-50 transition-all duration-300 bg-gray-50/95 backdrop-blur-md border-b border-gray-200/50">
-            <div class="container mx-auto max-w-6xl flex justify-between items-center">
-                <a href="/" class="text-base md:text-lg font-bold tracking-wide text-gray-900 hover:text-[#006837] transition-colors min-h-[44px] flex items-center">
+
+        <!-- Structured Data -->
+        <SchemaOrganization />
+    </head>
+    <body
+        class="bg-gray-50 text-[#333333] font-sans antialiased min-h-screen flex flex-col tracking-wide font-normal selection:bg-[#006837] selection:text-white relative"
+    >
+        <header
+            class="py-4 md:py-8 px-4 md:px-6 lg:px-12 fixed w-full top-0 z-50 transition-all duration-300 bg-gray-50/95 backdrop-blur-md border-b border-gray-200/50"
+        >
+            <div
+                class="container mx-auto max-w-6xl flex justify-between items-center"
+            >
+                <a
+                    href="/"
+                    class="text-base md:text-lg font-bold tracking-wide text-gray-900 hover:text-[#006837] transition-colors min-h-[44px] flex items-center"
+                >
                     AIU Cedar Society
                 </a>
                 <nav class="flex items-center gap-2 md:gap-4">
-                {/* About Dropdown */}
-                <div class="relative dropdown-container">
-                    <button class="dropdown-button text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3 gap-1">
-                        ABOUT
-                        <svg class="dropdown-icon w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    {/* About Dropdown */}
+                    <div class="relative dropdown-container">
+                        <button
+                            class="dropdown-button text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3 gap-1"
+                        >
+                            ABOUT
+                            <svg
+                                class="dropdown-icon w-3 h-3 transition-transform"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div
+                            class="dropdown-menu absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible transition-all duration-200 z-50"
+                        >
+                            <a
+                                href="/about"
+                                class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors border-b border-gray-100"
+                                >私たちについて</a
+                            >
+                            <a
+                                href="/about/history"
+                                class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors border-b border-gray-100"
+                                >設立の経緯</a
+                            >
+                            <a
+                                href="/about/members"
+                                class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors rounded-b-lg"
+                                >メンバー紹介</a
+                            >
+                        </div>
+                    </div>
+
+                    {/* Events Dropdown */}
+                    <div class="relative dropdown-container">
+                        <button
+                            class="dropdown-button text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3 gap-1"
+                        >
+                            EVENTS
+                            <svg
+                                class="dropdown-icon w-3 h-3 transition-transform"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div
+                            class="dropdown-menu absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible transition-all duration-200 z-50"
+                        >
+                            <a
+                                href="/events/upcoming"
+                                class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors border-b border-gray-100 rounded-t-lg"
+                                >今後の予定</a
+                            >
+                            <a
+                                href="/events/past"
+                                class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors rounded-b-lg"
+                                >過去の講演会</a
+                            >
+                        </div>
+                    </div>
+
+                    {/* Media Link */}
+                    <a
+                        href="/media"
+                        class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3"
+                        >MEDIA</a
+                    >
+
+                    {/* Contact Link */}
+                    <a
+                        href="/contact"
+                        class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3"
+                        >CONTACT</a
+                    >
+
+                    {/* Dark Mode Toggle */}
+                    <button
+                        id="theme-toggle"
+                        class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3"
+                        aria-label="ダークモード切替"
+                    >
+                        <svg
+                            id="theme-toggle-light-icon"
+                            class="w-5 h-5"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                            ></path>
+                        </svg>
+                        <svg
+                            id="theme-toggle-dark-icon"
+                            class="w-5 h-5 hidden"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <div class="dropdown-menu absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible transition-all duration-200 z-50">
-                        <a href="/about" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors border-b border-gray-100">私たちについて</a>
-                        <a href="/about/history" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors border-b border-gray-100">設立の経緯</a>
-                        <a href="/about/members" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors rounded-b-lg">メンバー紹介</a>
-                    </div>
-                </div>
-
-                {/* Events Dropdown */}
-                <div class="relative dropdown-container">
-                    <button class="dropdown-button text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3 gap-1">
-                        EVENTS
-                        <svg class="dropdown-icon w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </button>
-                    <div class="dropdown-menu absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible transition-all duration-200 z-50">
-                        <a href="/events/upcoming" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors border-b border-gray-100 rounded-t-lg">今後の予定</a>
-                        <a href="/events/past" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#006837] transition-colors rounded-b-lg">過去の講演会</a>
-                    </div>
-                </div>
-
-                {/* Media Link */}
-                <a href="/media" class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3">MEDIA</a>
-
-                {/* Contact Link */}
-                <a href="/contact" class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3">CONTACT</a>
-                
-                {/* Dark Mode Toggle */}
-                <button 
-                    id="theme-toggle"
-                    class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3"
-                    aria-label="ダークモード切替"
-                >
-                    <svg id="theme-toggle-light-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                    </svg>
-                    <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-            </nav>
+                </nav>
             </div>
         </header>
-		
-		<!-- Feedback Button (Staging) -->
-		<a 
-			href="https://forms.gle/pst2kQJxtYF4eTND8" 
-			target="_blank"
-			rel="noopener noreferrer"
-			id="feedback-button"
-			class="fixed bottom-24 right-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 flex items-center gap-3 px-5 py-3 hover:scale-105 group animate-pulse-slow"
-			aria-label="フィードバックを送る"
-		>
-			<svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
-			</svg>
-			<span class="font-bold text-sm whitespace-nowrap">フィードバック</span>
-		</a>
-		
-		<!-- Back to Top Button -->
-		<a 
-			href="#top" 
-			id="back-to-top"
-			class="fixed bottom-6 right-6 w-12 h-12 bg-[#006837] text-white rounded-full flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-[#005028] shadow-lg hover:shadow-xl z-50"
-			aria-label="トップに戻る"
-		>
-			<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
-			</svg>
-		</a>
-		
-		<main class="flex-grow pt-24" id="top">
+
+        <!-- Feedback Button (Staging) -->
+        <a
+            href="https://forms.gle/pst2kQJxtYF4eTND8"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="feedback-button"
+            class="fixed bottom-24 right-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 flex items-center gap-3 px-5 py-3 hover:scale-105 group animate-pulse-slow"
+            aria-label="フィードバックを送る"
+        >
+            <svg
+                class="w-5 h-5 group-hover:rotate-12 transition-transform"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                ></path>
+            </svg>
+            <span class="font-bold text-sm whitespace-nowrap"
+                >フィードバック</span
+            >
+        </a>
+
+        <!-- Back to Top Button -->
+        <a
+            href="#top"
+            id="back-to-top"
+            class="fixed bottom-6 right-6 w-12 h-12 bg-[#006837] text-white rounded-full flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-[#005028] shadow-lg hover:shadow-xl z-50"
+            aria-label="トップに戻る"
+        >
+            <svg
+                class="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+            </svg>
+        </a>
+
+        <main class="flex-grow pt-24" id="top">
             <slot />
         </main>
-        <footer class="py-12 px-6 border-t border-gray-200 bg-gray-50 relative z-10">
+        <footer
+            class="py-12 px-6 border-t border-gray-200 bg-gray-50 relative z-10"
+        >
             <div class="container mx-auto max-w-6xl">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                     <div>
-                        <p class="text-gray-900 font-bold text-lg mb-4">AIU Cedar Society</p>
-                        <p class="text-sm text-gray-600 leading-relaxed max-w-md">
+                        <p class="text-gray-900 font-bold text-lg mb-4">
+                            AIU Cedar Society
+                        </p>
+                        <p
+                            class="text-sm text-gray-600 leading-relaxed max-w-md"
+                        >
                             秋田国際教養大学の学生主導の公認団体。著名なゲストを招いた講演会を通じて、学生と秋田社会をつなぎます。
                         </p>
                     </div>
-                    
+
                     {/* Instagram Section */}
                     <div>
-                        <p class="text-gray-900 font-semibold mb-4">公式Instagram</p>
-                        <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-                            最新情報や講演会の様子を発信中！<br/>ぜひフォローしてください。
+                        <p class="text-gray-900 font-semibold mb-4">
+                            公式Instagram
                         </p>
-                        <a 
-                            href="https://www.instagram.com/aiucedarsociety" 
-                            target="_blank" 
+                        <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                            最新情報や講演会の様子を発信中！<br
+                            />ぜひフォローしてください。
+                        </p>
+                        <a
+                            href="https://www.instagram.com/aiucedarsociety"
+                            target="_blank"
                             rel="noopener noreferrer"
                             class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-purple-500 via-pink-500 to-yellow-500 text-white rounded-lg hover:opacity-90 transition-opacity duration-300 font-medium"
                         >
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            <svg
+                                class="w-5 h-5"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                                ></path>
                             </svg>
                             <span>@aiucedarsociety</span>
                         </a>
                     </div>
-                    
+
                     {/* Links */}
                     <div>
                         <p class="text-gray-900 font-semibold mb-4">リンク</p>
                         <div class="space-y-2">
-                            <a href="/about" class="block text-sm text-gray-600 hover:text-[#006837] transition-colors">団体について</a>
-                            <a href="/events/upcoming" class="block text-sm text-gray-600 hover:text-[#006837] transition-colors">今後の予定</a>
-                            <a href="/contact" class="block text-sm text-gray-600 hover:text-[#006837] transition-colors">お問い合わせ</a>
+                            <a
+                                href="/about"
+                                class="block text-sm text-gray-600 hover:text-[#006837] transition-colors"
+                                >団体について</a
+                            >
+                            <a
+                                href="/events/upcoming"
+                                class="block text-sm text-gray-600 hover:text-[#006837] transition-colors"
+                                >今後の予定</a
+                            >
+                            <a
+                                href="/contact"
+                                class="block text-sm text-gray-600 hover:text-[#006837] transition-colors"
+                                >お問い合わせ</a
+                            >
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="text-center pt-6 border-t border-gray-200">
-                    <p class="text-xs text-gray-500 tracking-widest">&copy; {new Date().getFullYear()} AIU Cedar Society. All rights reserved.</p>
+                    <p class="text-xs text-gray-500 tracking-widest">
+                        &copy; {new Date().getFullYear()} AIU Cedar Society. All rights
+                        reserved.
+                    </p>
                 </div>
             </div>
         </footer>
-	</body>
+    </body>
 </html>
 
 <style>
     :root {
-        --font-sans: 'Noto Sans JP', sans-serif;
+        --font-sans: "Noto Sans JP", sans-serif;
         --color-aiu-green: #006837;
     }
     html {
         font-family: var(--font-sans);
     }
-    
+
     /* Desktop hover support */
     @media (hover: hover) {
         .dropdown-container:hover .dropdown-menu {
@@ -544,7 +694,7 @@ const { seo = {} } = Astro.props;
             transform: rotate(180deg);
         }
     }
-    
+
     /* Active dropdown state */
     .dropdown-container.active .dropdown-menu {
         opacity: 1;
@@ -557,123 +707,125 @@ const { seo = {} } = Astro.props;
 
 <script is:inline>
     // Dark Mode Toggle with localStorage
-    const themeToggle = document.getElementById('theme-toggle');
-    const lightIcon = document.getElementById('theme-toggle-light-icon');
-    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggle = document.getElementById("theme-toggle");
+    const lightIcon = document.getElementById("theme-toggle-light-icon");
+    const darkIcon = document.getElementById("theme-toggle-dark-icon");
     const html = document.documentElement;
-    
+
     // Check for saved theme preference or default to light mode
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    
+    const currentTheme = localStorage.getItem("theme") || "light";
+
     // Apply theme on load
-    if (currentTheme === 'dark') {
-        html.setAttribute('data-theme', 'dark');
-        lightIcon?.classList.add('hidden');
-        darkIcon?.classList.remove('hidden');
+    if (currentTheme === "dark") {
+        html.setAttribute("data-theme", "dark");
+        lightIcon?.classList.add("hidden");
+        darkIcon?.classList.remove("hidden");
     }
-    
+
     // Toggle theme
-    themeToggle?.addEventListener('click', function() {
-        const theme = html.getAttribute('data-theme');
-        
-        if (theme === 'dark') {
-            html.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-            lightIcon?.classList.remove('hidden');
-            darkIcon?.classList.add('hidden');
+    themeToggle?.addEventListener("click", function () {
+        const theme = html.getAttribute("data-theme");
+
+        if (theme === "dark") {
+            html.setAttribute("data-theme", "light");
+            localStorage.setItem("theme", "light");
+            lightIcon?.classList.remove("hidden");
+            darkIcon?.classList.add("hidden");
         } else {
-            html.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            lightIcon?.classList.add('hidden');
-            darkIcon?.classList.remove('hidden');
+            html.setAttribute("data-theme", "dark");
+            localStorage.setItem("theme", "dark");
+            lightIcon?.classList.add("hidden");
+            darkIcon?.classList.remove("hidden");
         }
     });
 
     // Dropdown Menu Functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const dropdownContainers = document.querySelectorAll('.dropdown-container');
-        
-        dropdownContainers.forEach(container => {
-            const button = container.querySelector('.dropdown-button');
-            const menu = container.querySelector('.dropdown-menu');
-            
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdownContainers = document.querySelectorAll(
+            ".dropdown-container",
+        );
+
+        dropdownContainers.forEach((container) => {
+            const button = container.querySelector(".dropdown-button");
+            const menu = container.querySelector(".dropdown-menu");
+
             // Toggle dropdown on button click (for mobile and desktop)
-            button.addEventListener('click', function(e) {
+            button.addEventListener("click", function (e) {
                 e.stopPropagation();
-                
+
                 // Close all other dropdowns
-                dropdownContainers.forEach(otherContainer => {
+                dropdownContainers.forEach((otherContainer) => {
                     if (otherContainer !== container) {
-                        otherContainer.classList.remove('active');
+                        otherContainer.classList.remove("active");
                     }
                 });
-                
+
                 // Toggle current dropdown
-                container.classList.toggle('active');
+                container.classList.toggle("active");
             });
-            
+
             // Prevent dropdown from closing when clicking inside menu
-            menu.addEventListener('click', function(e) {
+            menu.addEventListener("click", function (e) {
                 e.stopPropagation();
             });
         });
-        
+
         // Close dropdowns when clicking outside
-        document.addEventListener('click', function() {
-            dropdownContainers.forEach(container => {
-                container.classList.remove('active');
+        document.addEventListener("click", function () {
+            dropdownContainers.forEach((container) => {
+                container.classList.remove("active");
             });
         });
-        
+
         // Close dropdowns on navigation (when clicking a link inside dropdown)
-        document.querySelectorAll('.dropdown-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                dropdownContainers.forEach(container => {
-                    container.classList.remove('active');
+        document.querySelectorAll(".dropdown-menu a").forEach((link) => {
+            link.addEventListener("click", function () {
+                dropdownContainers.forEach((container) => {
+                    container.classList.remove("active");
                 });
             });
         });
     });
-    
+
     // Toast Notification System
-    window.showToast = function(message, type = 'success') {
-        const container = document.getElementById('toast-container');
+    window.showToast = function (message, type = "success") {
+        const container = document.getElementById("toast-container");
         if (!container) return;
-        
-        const toast = document.createElement('div');
+
+        const toast = document.createElement("div");
         toast.className = `toast toast-${type}`;
-        toast.setAttribute('role', 'alert');
-        toast.setAttribute('aria-live', 'polite');
-        
+        toast.setAttribute("role", "alert");
+        toast.setAttribute("aria-live", "polite");
+
         const icons = {
-            success: '✓',
-            error: '✕',
-            info: 'ℹ'
+            success: "✓",
+            error: "✕",
+            info: "ℹ",
         };
-        
+
         toast.innerHTML = `
-            <div class="toast-icon" style="color: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'}; font-size: 18px; font-weight: bold;">
+            <div class="toast-icon" style="color: ${type === "success" ? "#10b981" : type === "error" ? "#ef4444" : "#3b82f6"}; font-size: 18px; font-weight: bold;">
                 ${icons[type] || icons.info}
             </div>
             <div class="toast-message">${message}</div>
         `;
-        
+
         container.appendChild(toast);
-        
+
         setTimeout(() => {
-            toast.classList.add('show');
+            toast.classList.add("show");
         }, 100);
-        
+
         setTimeout(() => {
-            toast.classList.remove('show');
+            toast.classList.remove("show");
             setTimeout(() => toast.remove(), 300);
         }, 3000);
     };
-    
+
     // View Transitions API Support
     if (document.startViewTransition) {
         // Enable smooth page transitions
-        window.addEventListener('popstate', () => {
+        window.addEventListener("popstate", () => {
             if (document.startViewTransition) {
                 document.startViewTransition(() => {
                     // Page will transition smoothly
@@ -681,16 +833,20 @@ const { seo = {} } = Astro.props;
             }
         });
     }
-    
+
     // Back to Top Button Handler
-    window.addEventListener('scroll', function() {
-        const backToTopBtn = document.getElementById('back-to-top');
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.remove('opacity-0', 'invisible');
-            backToTopBtn.classList.add('opacity-100', 'visible');
-        } else {
-            backToTopBtn.classList.add('opacity-0', 'invisible');
-            backToTopBtn.classList.remove('opacity-100', 'visible');
-        }
-    }, { passive: true });
+    window.addEventListener(
+        "scroll",
+        function () {
+            const backToTopBtn = document.getElementById("back-to-top");
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove("opacity-0", "invisible");
+                backToTopBtn.classList.add("opacity-100", "visible");
+            } else {
+                backToTopBtn.classList.add("opacity-0", "invisible");
+                backToTopBtn.classList.remove("opacity-100", "visible");
+            }
+        },
+        { passive: true },
+    );
 </script>
