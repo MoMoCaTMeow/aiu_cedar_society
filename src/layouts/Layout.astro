@@ -166,16 +166,16 @@ const { seo = {} } = Astro.props;
             }
 
             [data-theme="dark"] {
-                --bg-primary: #1f2937;
-                --bg-secondary: #111827;
-                --bg-gradient-start: #111827;
-                --bg-gradient-end: #1f2937;
-                --text-primary: #f9fafb;
-                --text-secondary: #d1d5db;
-                --text-tertiary: #9ca3af;
-                --border-color: #374151;
-                --border-color-hover: rgba(0, 168, 79, 0.4);
-                --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+                --bg-primary: #1c1c1e; /* macOS dark card */
+                --bg-secondary: #000000; /* macOS black background */
+                --bg-gradient-start: #000000;
+                --bg-gradient-end: #1c1c1e;
+                --text-primary: #ffffff; /* Pure white */
+                --text-secondary: #ebebf5; /* macOS secondary label */
+                --text-tertiary: #ebebf599; /* macOS tertiary label */
+                --border-color: #38383a; /* macOS separator */
+                --border-color-hover: rgba(50, 215, 75, 0.4); /* macOS green */
+                --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
                 --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
                 --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
                 --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
@@ -195,119 +195,145 @@ const { seo = {} } = Astro.props;
                     color 0.3s ease;
             }
 
-            /* Comprehensive Dark Mode Styles */
+            /* Comprehensive Dark Mode Styles - macOS Inspired */
 
-            /* Background Colors */
+            /* Background Colors - Natural, softer tones */
             [data-theme="dark"] .bg-white {
-                background-color: #1f2937 !important;
+                background-color: #1c1c1e !important; /* macOS dark card background */
             }
 
             [data-theme="dark"] .bg-gray-50 {
-                background-color: #111827 !important;
+                background-color: #000000 !important; /* macOS true black background */
             }
 
             [data-theme="dark"] .bg-gray-100 {
-                background-color: #374151 !important;
+                background-color: #2c2c2e !important; /* macOS secondary background */
             }
 
             [data-theme="dark"] .bg-gradient-to-b {
                 background-image: linear-gradient(
                     to bottom,
-                    #111827,
-                    #1f2937
+                    #000000,
+                    #1c1c1e
                 ) !important;
             }
 
+            /* Accent color - slightly muted for dark mode */
             [data-theme="dark"] .bg-\[\#006837\] {
-                background-color: #00a84f !important;
+                background-color: #34c759 !important; /* macOS system green */
             }
 
-            /* Text Colors - High Contrast */
+            /* Text Colors - Natural contrast */
             [data-theme="dark"] .text-gray-900,
             [data-theme="dark"] .text-gray-800,
             [data-theme="dark"] .text-gray-700 {
-                color: #f9fafb !important;
+                color: #ffffff !important; /* Pure white for primary text */
             }
 
             [data-theme="dark"] .text-gray-600 {
-                color: #e5e7eb !important;
+                color: #ebebf5 !important; /* macOS secondary label */
             }
 
             [data-theme="dark"] .text-gray-500 {
-                color: #d1d5db !important;
+                color: #ebebf599 !important; /* macOS tertiary label - 60% opacity */
             }
 
             [data-theme="dark"] .text-gray-400 {
-                color: #9ca3af !important;
+                color: #ebebf54d !important; /* macOS quaternary label - 30% opacity */
             }
 
             [data-theme="dark"] .text-gray-300 {
-                color: #6b7280 !important;
+                color: #ebebf533 !important; /* Subtle text - 20% opacity */
             }
 
-            /* Links */
+            /* Accent text colors */
+            [data-theme="dark"] .text-\[\#006837\] {
+                color: #32d74b !important; /* macOS system green (lighter) */
+            }
+
+            [data-theme="dark"] .hover\:text-\[\#006837\]:hover {
+                color: #30d158 !important;
+            }
+
+            /* Links - Natural appearance */
             [data-theme="dark"]
                 a:not(.bg-\[\#006837\]):not(.bg-black):not(.bg-gradient-to-r) {
-                color: #e5e7eb;
+                color: #ebebf5;
             }
 
             [data-theme="dark"] a:hover {
-                color: #00d26a;
+                color: #32d74b; /* macOS green on hover */
             }
 
-            /* Borders */
+            /* Borders - Subtle separators */
             [data-theme="dark"] .border-gray-200,
             [data-theme="dark"] .border-gray-100 {
-                border-color: #374151 !important;
+                border-color: #38383a !important; /* macOS separator */
             }
 
             [data-theme="dark"] .border-t,
-            [data-theme="dark"] .border-b {
-                border-color: #374151 !important;
+            [data-theme="dark"] .border-b,
+            [data-theme="dark"] .border-l {
+                border-color: #38383a !important;
             }
 
-            /* Shadows */
+            [data-theme="dark"] .border-\[\#006837\] {
+                border-color: #32d74b !important;
+            }
+
+            /* Shadows - Softer, more natural */
             [data-theme="dark"] .shadow-sm {
-                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5) !important;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3) !important;
             }
 
             [data-theme="dark"] .shadow-md {
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.6) !important;
+                box-shadow:
+                    0 4px 6px -1px rgba(0, 0, 0, 0.4),
+                    0 2px 4px -1px rgba(0, 0, 0, 0.3) !important;
             }
 
             [data-theme="dark"] .shadow-lg {
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.7) !important;
+                box-shadow:
+                    0 10px 15px -3px rgba(0, 0, 0, 0.5),
+                    0 4px 6px -2px rgba(0, 0, 0, 0.3) !important;
             }
 
             [data-theme="dark"] .shadow-xl {
-                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.8) !important;
+                box-shadow:
+                    0 20px 25px -5px rgba(0, 0, 0, 0.6),
+                    0 10px 10px -5px rgba(0, 0, 0, 0.4) !important;
             }
 
-            /* Header */
+            /* Header - Fixed backdrop blur issue */
             [data-theme="dark"] header {
-                background-color: #1f2937;
-                border-bottom-color: #374151;
+                background-color: rgba(
+                    28,
+                    28,
+                    30,
+                    0.8
+                ) !important; /* Semi-transparent dark */
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                border-bottom-color: #38383a !important;
             }
 
             /* Footer */
             [data-theme="dark"] footer {
-                background-color: #111827 !important;
-                border-top-color: #374151 !important;
+                background-color: #1c1c1e !important;
+                border-top-color: #38383a !important;
             }
 
-            /* Hover States */
+            /* Hover States - Subtle */
             [data-theme="dark"] .hover\:bg-gray-50:hover {
-                background-color: #374151 !important;
-            }
-
-            [data-theme="dark"] .hover\:text-\[\#006837\]:hover {
-                color: #00d26a !important;
+                background-color: #2c2c2e !important;
             }
 
             /* Dropdown Menus */
             [data-theme="dark"] .dropdown-menu {
-                background-color: #1f2937 !important;
-                border-color: #374151 !important;
+                background-color: rgba(44, 44, 46, 0.95) !important;
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                border-color: #38383a !important;
             }
 
             /* Font Display Optimization */
@@ -627,7 +653,7 @@ const { seo = {} } = Astro.props;
             target="_blank"
             rel="noopener noreferrer"
             id="feedback-button"
-            class="fixed bottom-24 right-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 flex items-center gap-3 px-5 py-3 hover:scale-105 group animate-pulse-slow"
+            class="fixed bottom-24 right-6 bg-white dark:bg-gray-800 text-[#006837] dark:text-green-400 border-2 border-[#006837] dark:border-green-400 rounded-full shadow-lg hover:shadow-xl hover:bg-[#006837] hover:text-white dark:hover:bg-green-400 dark:hover:text-gray-900 transition-all duration-300 z-50 flex items-center gap-3 px-5 py-3 hover:scale-105 group"
             aria-label="フィードバックを送る"
         >
             <svg
@@ -701,7 +727,7 @@ const { seo = {} } = Astro.props;
                             href="https://www.instagram.com/aiucedarsociety"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-purple-500 via-pink-500 to-yellow-500 text-white rounded-lg hover:opacity-90 transition-opacity duration-300 font-medium"
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-gray-800 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-900 dark:hover:bg-gray-600 transition-colors duration-300 font-medium"
                         >
                             <svg
                                 class="w-5 h-5"
