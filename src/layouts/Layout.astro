@@ -350,9 +350,26 @@ const { seo = {} } = Astro.props;
                 background: #1f2937;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             }
-            
             [data-theme="dark"] .toast-message {
                 color: #f9fafb;
+            }
+            
+            /* Feedback Button Animation */
+            @keyframes pulse-slow {
+                0%, 100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.85;
+                }
+            }
+            
+            .animate-pulse-slow {
+                animation: pulse-slow 3s ease-in-out infinite;
+            }
+            
+            #feedback-button:hover {
+                animation: none;
             }
             
             ::selection {
@@ -422,6 +439,21 @@ const { seo = {} } = Astro.props;
             </nav>
             </div>
         </header>
+		
+		<!-- Feedback Button (Staging) -->
+		<a 
+			href="https://forms.gle/pst2kQJxtYF4eTND8" 
+			target="_blank"
+			rel="noopener noreferrer"
+			id="feedback-button"
+			class="fixed bottom-24 right-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 flex items-center gap-3 px-5 py-3 hover:scale-105 group animate-pulse-slow"
+			aria-label="フィードバックを送る"
+		>
+			<svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+			</svg>
+			<span class="font-bold text-sm whitespace-nowrap">フィードバック</span>
+		</a>
 		
 		<!-- Back to Top Button -->
 		<a 
