@@ -8,6 +8,7 @@ const response = await getLectures({
         "id",
         "title",
         "guest_name",
+        "belonging",
         "event_date",
         "description",
         "eyecatch",
@@ -372,9 +373,14 @@ const seo = {
                                                 {lecture.title}
                                             </h3>
 
-                                            <p class="text-sm sm:text-base text-[#006837] font-semibold mb-2 md:mb-3 truncate">
+                                            <p class="text-sm sm:text-base text-[#006837] font-semibold truncate">
                                                 {lecture.guest_name}
                                             </p>
+                                            {lecture.belonging && (
+                                                <p class="text-xs sm:text-sm text-gray-600 mb-2 md:mb-3 truncate">
+                                                    {lecture.belonging}
+                                                </p>
+                                            )}
                                         </div>
 
                                         <div class="flex items-center text-xs sm:text-sm text-[#006837] font-medium">
