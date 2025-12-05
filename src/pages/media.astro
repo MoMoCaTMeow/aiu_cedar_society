@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import BreadcrumbSchema from "../components/BreadcrumbSchema.astro";
 import { getMediaCoverage } from "../library/microcms";
 
 // Fetch media coverage
@@ -11,15 +13,22 @@ const seo = {
     title: "メディア掲載 | AIU Cedar Society",
     description:
         "AIU Cedar Societyの新聞・雑誌・ウェブメディアでの掲載情報。秋田魁新報など、地元メディアでの取り上げを紹介します。",
-    keywords: "AIU Cedar Society,メディア掲載,プレス,取材,新聞",
+    keywords: "AIU Cedar Society,メディア掲載,報道,新聞,テレビ,ニュース",
 };
+
+const breadcrumbItems = [
+    { label: "ホーム", href: "/" },
+    { label: "メディア掲載" },
+];
 ---
 
 <Layout seo={seo}>
+    <BreadcrumbSchema items={breadcrumbItems} />
     <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
         <div
-            class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-4xl"
+            class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-5xl"
         >
+            <Breadcrumb items={breadcrumbItems} />
             {/* Back Button */}
             <a
                 href="/"
@@ -173,11 +182,11 @@ const seo = {
 
             {/* Info Card */}
             <div
-                class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 md:p-8 border border-gray-200 dark:border-gray-700"
+                class="bg-gray-50 rounded-lg p-6 md:p-8 border border-gray-200"
             >
                 <div class="flex items-start gap-3">
                     <svg
-                        class="w-6 h-6 text-[#006837] dark:text-green-400 flex-shrink-0 mt-1"
+                        class="w-6 h-6 text-[#006837] flex-shrink-0 mt-1"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -190,20 +199,16 @@ const seo = {
                         ></path>
                     </svg>
                     <div>
-                        <h3
-                            class="text-lg font-bold text-gray-900 dark:text-white mb-2"
-                        >
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">
                             取材について
                         </h3>
-                        <p
-                            class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4"
-                        >
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
                             AIU Cedar
                             Societyへの取材依頼や、メディア掲載に関するお問い合わせは、お問い合わせフォームよりご連絡ください。
                         </p>
                         <a
                             href="/contact"
-                            class="inline-flex items-center gap-2 text-sm font-bold text-[#006837] dark:text-green-400 hover:gap-3 transition-all"
+                            class="inline-flex items-center gap-2 text-sm font-bold text-[#006837] hover:gap-3 transition-all"
                         >
                             <span>お問い合わせ</span>
                             <svg

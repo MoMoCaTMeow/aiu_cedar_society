@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import SEO from "../components/SEO.astro";
 import SchemaOrganization from "../components/SchemaOrganization.astro";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
     seo?: {
@@ -42,6 +43,9 @@ const { seo = {} } = Astro.props;
         <!-- SEO Meta Tags -->
         <SEO {...seo} />
 
+        <!-- View Transitions for smooth page navigation -->
+        <ViewTransitions />
+
         <!-- DNS Prefetch for faster resolution -->
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
@@ -74,6 +78,35 @@ const { seo = {} } = Astro.props;
                 rel="stylesheet"
             />
         </noscript>
+
+        <!-- NProgress Styles (inline for fast loading) -->
+        <style>
+            /* NProgress Loading Bar */
+            #nprogress {
+                pointer-events: none;
+            }
+            #nprogress .bar {
+                background: #006837;
+                position: fixed;
+                z-index: 9999;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 3px;
+            }
+            #nprogress .peg {
+                display: block;
+                position: absolute;
+                right: 0px;
+                width: 100px;
+                height: 100%;
+                box-shadow:
+                    0 0 10px #006837,
+                    0 0 5px #006837;
+                opacity: 1;
+                transform: rotate(3deg) translate(0px, -4px);
+            }
+        </style>
 
         <!-- Critical CSS for above-the-fold content - reduces FCP -->
         <style>
@@ -119,6 +152,25 @@ const { seo = {} } = Astro.props;
             }
         </style>
 
+        <!-- NProgress Script (load early for page transitions) -->
+        <script is:inline>
+            // Import NProgress from CDN for minimal bundle impact
+            (function () {
+                const script = document.createElement("script");
+                script.src = "https://unpkg.com/nprogress@0.2.0/nprogress.js";
+                script.onload = function () {
+                    if (typeof NProgress !== "undefined") {
+                        NProgress.configure({
+                            showSpinner: false,
+                            trickleSpeed: 200,
+                            minimum: 0.08,
+                        });
+                    }
+                };
+                document.head.appendChild(script);
+            })();
+        </script>
+
         <!-- Google Analytics 4 (Deferred for better performance) -->
         <script is:inline>
             // Defer GA loading until after page load
@@ -150,6 +202,7 @@ const { seo = {} } = Astro.props;
         <style is:global>
             /* CSS Variables for Dark Mode */
             :root {
+                /* Legacy Dark Mode Variables (保持) */
                 --bg-primary: #ffffff;
                 --bg-secondary: #f9fafb;
                 --bg-gradient-start: #f9fafb;
@@ -163,6 +216,106 @@ const { seo = {} } = Astro.props;
                 --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
                 --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
                 --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+                /* ===== Design Token System ===== */
+
+                /* Primary Color Scale */
+                --color-primary-50: #e6f7ef;
+                --color-primary-100: #ccefdf;
+                --color-primary-200: #99dfbf;
+                --color-primary-300: #66cf9f;
+                --color-primary-400: #33bf7f;
+                --color-primary-500: #006837;
+                --color-primary-600: #005028;
+                --color-primary-700: #003c1e;
+                --color-primary-800: #002814;
+                --color-primary-900: #00140a;
+
+                /* Gray Scale */
+                --color-gray-50: #f9fafb;
+                --color-gray-100: #f3f4f6;
+                --color-gray-200: #e5e7eb;
+                --color-gray-300: #d1d5db;
+                --color-gray-400: #9ca3af;
+                --color-gray-500: #6b7280;
+                --color-gray-600: #4b5563;
+                --color-gray-700: #374151;
+                --color-gray-800: #1f2937;
+                --color-gray-900: #111827;
+
+                /* Semantic Colors */
+                --color-success: #10b981;
+                --color-warning: #f59e0b;
+                --color-error: #ef4444;
+                --color-info: #3b82f6;
+
+                /* Typography */
+                --font-sans:
+                    "Noto Sans JP", -apple-system, BlinkMacSystemFont,
+                    sans-serif;
+                --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+
+                --font-size-xs: 0.75rem;
+                --font-size-sm: 0.875rem;
+                --font-size-base: 1rem;
+                --font-size-lg: 1.125rem;
+                --font-size-xl: 1.25rem;
+                --font-size-2xl: 1.5rem;
+                --font-size-3xl: 1.875rem;
+                --font-size-4xl: 2.25rem;
+                --font-size-5xl: 3rem;
+                --font-size-6xl: 3.75rem;
+
+                --font-weight-normal: 400;
+                --font-weight-medium: 500;
+                --font-weight-semibold: 600;
+                --font-weight-bold: 700;
+
+                --line-height-tight: 1.25;
+                --line-height-normal: 1.5;
+                --line-height-relaxed: 1.75;
+                --line-height-loose: 2;
+
+                /* Spacing (4px base) */
+                --space-0: 0;
+                --space-1: 0.25rem;
+                --space-2: 0.5rem;
+                --space-3: 0.75rem;
+                --space-4: 1rem;
+                --space-5: 1.25rem;
+                --space-6: 1.5rem;
+                --space-8: 2rem;
+                --space-10: 2.5rem;
+                --space-12: 3rem;
+                --space-16: 4rem;
+                --space-20: 5rem;
+                --space-24: 6rem;
+
+                /* Transitions */
+                --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+                --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+                --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+                --ease-in: cubic-bezier(0.4, 0, 1, 1);
+                --ease-out: cubic-bezier(0, 0, 0.2, 1);
+                --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+                /* Border Radius */
+                --radius-sm: 0.25rem;
+                --radius-md: 0.5rem;
+                --radius-lg: 0.75rem;
+                --radius-xl: 1rem;
+                --radius-full: 9999px;
+
+                /* Z-Index Scale */
+                --z-base: 0;
+                --z-dropdown: 10;
+                --z-sticky: 20;
+                --z-fixed: 30;
+                --z-modal-backdrop: 40;
+                --z-modal: 50;
+                --z-popover: 60;
+                --z-tooltip: 70;
             }
 
             [data-theme="dark"] {
@@ -352,21 +505,42 @@ const { seo = {} } = Astro.props;
                 contain: layout;
             }
 
-            /* Focus Enhancement for Keyboard Navigation */
+            /* Enhanced Focus for WCAG 2.2 Compliance */
             a:focus-visible,
             button:focus-visible,
             input:focus-visible,
             textarea:focus-visible,
             select:focus-visible {
                 outline: 3px solid #006837;
-                outline-offset: 2px;
+                outline-offset: 3px;
                 border-radius: 4px;
+                position: relative;
+                z-index: 100; /* Ensure focus is not obscured */
+                transition: outline-offset 0.2s ease;
+            }
+
+            /* Focus Appearance - Enhanced contrast */
+            [data-theme="dark"] a:focus-visible,
+            [data-theme="dark"] button:focus-visible,
+            [data-theme="dark"] input:focus-visible,
+            [data-theme="dark"] textarea:focus-visible,
+            [data-theme="dark"] select:focus-visible {
+                outline-color: #32d74b;
             }
 
             /* Remove outline for mouse users */
             a:focus:not(:focus-visible),
             button:focus:not(:focus-visible) {
                 outline: none;
+            }
+
+            /* Touch Target Size Optimization - WCAG 2.2 */
+            button,
+            a,
+            input[type="submit"],
+            input[type="button"] {
+                min-height: 44px;
+                min-width: 44px;
             }
 
             /* Skeleton Loading Animation */
@@ -504,6 +678,83 @@ const { seo = {} } = Astro.props;
             ::selection {
                 background-color: #006837;
                 color: white;
+            }
+
+            /* Micro-interactions */
+
+            /* Ripple Effect for Buttons */
+            @keyframes ripple {
+                0% {
+                    transform: scale(0);
+                    opacity: 0.6;
+                }
+                100% {
+                    transform: scale(2.5);
+                    opacity: 0;
+                }
+            }
+
+            .ripple-effect {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .ripple-effect::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 20px;
+                height: 20px;
+                background: rgba(255, 255, 255, 0.5);
+                border-radius: 50%;
+                transform: translate(-50%, -50%) scale(0);
+                pointer-events: none;
+            }
+
+            .ripple-effect:active::after {
+                animation: ripple 0.6s ease-out;
+            }
+
+            /* 3D Tilt Effect for Cards with Enhanced Depth */
+            .card-tilt {
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+                transform-style: preserve-3d;
+                box-shadow:
+                    0 4px 20px -8px rgba(0, 104, 55, 0.08),
+                    0 0 0 1px rgba(0, 0, 0, 0.04);
+            }
+
+            @media (hover: hover) {
+                .card-tilt:hover {
+                    transform: perspective(1000px) rotateY(2deg) rotateX(-2deg)
+                        scale(1.01);
+                    box-shadow:
+                        0 12px 40px -10px rgba(0, 104, 55, 0.15),
+                        0 0 0 1px rgba(0, 104, 55, 0.08);
+                }
+            }
+
+            /* Smooth hover transitions */
+            .smooth-hover {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            /* Will-change for performance optimization */
+            .card-tilt,
+            .smooth-hover {
+                will-change: transform;
+            }
+
+            /* Remove will-change after interaction */
+            @media (prefers-reduced-motion: reduce) {
+                .card-tilt,
+                .smooth-hover {
+                    will-change: auto;
+                    transition: none;
+                }
             }
         </style>
 
@@ -807,38 +1058,56 @@ const { seo = {} } = Astro.props;
 </style>
 
 <script is:inline>
-    // Dark Mode Toggle with localStorage
-    const themeToggle = document.getElementById("theme-toggle");
-    const lightIcon = document.getElementById("theme-toggle-light-icon");
-    const darkIcon = document.getElementById("theme-toggle-dark-icon");
-    const html = document.documentElement;
+    // Dark Mode Toggle with localStorage (View Transitions Compatible)
+    function initThemeToggle() {
+        const themeToggle = document.getElementById("theme-toggle");
+        const lightIcon = document.getElementById("theme-toggle-light-icon");
+        const darkIcon = document.getElementById("theme-toggle-dark-icon");
+        const html = document.documentElement;
 
-    // Check for saved theme preference or default to light mode
-    const currentTheme = localStorage.getItem("theme") || "light";
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem("theme") || "light";
 
-    // Apply theme on load
-    if (currentTheme === "dark") {
-        html.setAttribute("data-theme", "dark");
-        lightIcon?.classList.add("hidden");
-        darkIcon?.classList.remove("hidden");
-    }
-
-    // Toggle theme
-    themeToggle?.addEventListener("click", function () {
-        const theme = html.getAttribute("data-theme");
-
-        if (theme === "dark") {
-            html.setAttribute("data-theme", "light");
-            localStorage.setItem("theme", "light");
-            lightIcon?.classList.remove("hidden");
-            darkIcon?.classList.add("hidden");
-        } else {
+        // Apply theme on load
+        if (currentTheme === "dark") {
             html.setAttribute("data-theme", "dark");
-            localStorage.setItem("theme", "dark");
             lightIcon?.classList.add("hidden");
             darkIcon?.classList.remove("hidden");
+        } else {
+            html.setAttribute("data-theme", "light");
+            lightIcon?.classList.remove("hidden");
+            darkIcon?.classList.add("hidden");
         }
-    });
+
+        // Remove existing listener to prevent duplicates
+        if (themeToggle) {
+            themeToggle.replaceWith(themeToggle.cloneNode(true));
+            const newToggle = document.getElementById("theme-toggle");
+
+            // Toggle theme
+            newToggle?.addEventListener("click", function () {
+                const theme = html.getAttribute("data-theme");
+
+                if (theme === "dark") {
+                    html.setAttribute("data-theme", "light");
+                    localStorage.setItem("theme", "light");
+                    lightIcon?.classList.remove("hidden");
+                    darkIcon?.classList.add("hidden");
+                } else {
+                    html.setAttribute("data-theme", "dark");
+                    localStorage.setItem("theme", "dark");
+                    lightIcon?.classList.add("hidden");
+                    darkIcon?.classList.remove("hidden");
+                }
+            });
+        }
+    }
+
+    // Initialize on first page load
+    initThemeToggle();
+
+    // Re-initialize after View Transitions page swap
+    document.addEventListener("astro:page-load", initThemeToggle);
 
     // Dropdown Menu Functionality
     document.addEventListener("DOMContentLoaded", function () {
@@ -923,17 +1192,24 @@ const { seo = {} } = Astro.props;
         }, 3000);
     };
 
-    // View Transitions API Support
-    if (document.startViewTransition) {
-        // Enable smooth page transitions
-        window.addEventListener("popstate", () => {
-            if (document.startViewTransition) {
-                document.startViewTransition(() => {
-                    // Page will transition smoothly
-                });
-            }
-        });
-    }
+    // View Transitions API with NProgress Integration
+    document.addEventListener("astro:before-preparation", () => {
+        if (typeof NProgress !== "undefined") {
+            NProgress.start();
+        }
+    });
+
+    document.addEventListener("astro:after-swap", () => {
+        if (typeof NProgress !== "undefined") {
+            NProgress.done();
+        }
+    });
+
+    document.addEventListener("astro:page-load", () => {
+        if (typeof NProgress !== "undefined") {
+            NProgress.done();
+        }
+    });
 
     // Back to Top Button Handler
     window.addEventListener(

@@ -43,18 +43,20 @@ const seo = {
     <div
         class="bg-gradient-to-b from-gray-50 to-white min-h-screen relative overflow-hidden"
     >
-        {/* Animated Background Gradient */}
+        {/* Animated Background Gradient with Parallax */}
         <div
-            class="absolute inset-0 bg-gradient-to-br from-[#006837]/3 via-transparent to-gray-100/50 animate-gradient-shift pointer-events-none"
+            id="parallax-bg"
+            class="absolute inset-0 bg-gradient-to-br from-[#006837]/3 via-transparent to-gray-100/50 pointer-events-none"
+            style="will-change: transform;"
         >
         </div>
 
-        {/* Hero Section */}
+        {/* Hero Section with 3D Depth */}
         <section
-            class="relative pt-16 md:pt-20 pb-12 md:pb-16 px-4 md:px-6 border-b border-gray-200"
+            class="relative pt-16 md:pt-20 pb-12 md:pb-16 px-4 md:px-6 border-b border-gray-200 hero-3d-container"
         >
-            <div class="container mx-auto max-w-5xl">
-                <div class="relative hero-content">
+            <div class="container mx-auto px-4 md:px-6 max-w-5xl">
+                <div class="relative hero-content hero-3d-content">
                     <div class="relative mb-4 md:mb-6">
                         <div
                             class="absolute top-0 left-0 w-px h-full bg-[#006837] hero-line"
@@ -283,10 +285,10 @@ const seo = {
                     lectures.map((lecture, index) => (
                         <a
                             href={`/lectures/${lecture.id}`}
-                            class="lecture-card block group"
+                            class="lecture-card block group card-tilt"
                             style={`animation-delay: ${index * 100}ms`}
                         >
-                            <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-[#006837] hover:border-opacity-30 transform hover:-translate-y-2 hover:scale-[1.02]">
+                            <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-[#006837] hover:border-opacity-30">
                                 <div class="flex flex-row gap-0">
                                     {/* Image - モバイルでも横並び、サイズを小さく */}
                                     <div class="w-24 sm:w-32 md:w-48 flex-shrink-0 relative overflow-hidden bg-gray-100">
@@ -494,6 +496,43 @@ const seo = {
         }
     }
 
+    /* 3D Hero Effects */
+    .hero-3d-container {
+        perspective: 1200px;
+        perspective-origin: center center;
+    }
+
+    .hero-3d-content {
+        transform-style: preserve-3d;
+    }
+
+    .hero-3d-content h1 {
+        transform: translateZ(20px);
+        transform-style: preserve-3d;
+    }
+
+    .hero-3d-content p {
+        transform: translateZ(10px);
+    }
+
+    .hero-3d-content .hero-line {
+        transform: translateZ(15px);
+    }
+
+    /* Disable 3D for users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        .hero-3d-container {
+            perspective: none;
+        }
+
+        .hero-3d-content,
+        .hero-3d-content h1,
+        .hero-3d-content p,
+        .hero-3d-content .hero-line {
+            transform: none !important;
+        }
+    }
+
     @keyframes fade-in-right {
         from {
             opacity: 0;
@@ -548,6 +587,47 @@ const seo = {
 </style>
 
 <script is:inline>
+    // Parallax Effect for Hero Background with 3D Depth (Passive & Performance Optimized)
+    (function () {
+        const parallaxBg = document.getElementById("parallax-bg");
+        if (!parallaxBg) return;
+
+        let ticking = false;
+
+        function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * 0.3; // Parallax speed (30% of scroll speed)
+
+            // Use transform for GPU acceleration with 3D depth
+            parallaxBg.style.transform = `translateY(${rate}px) translateZ(-30px) scale(1.03)`;
+            ticking = false;
+        }
+
+        function requestTick() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        }
+
+        // Use passive listener for better scroll performance
+        window.addEventListener("scroll", requestTick, { passive: true });
+
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        );
+        if (prefersReducedMotion.matches) {
+            parallaxBg.style.transform = "none";
+            window.removeEventListener("scroll", requestTick);
+        }
+
+        // Cleanup on page navigation
+        document.addEventListener("astro:before-preparation", () => {
+            window.removeEventListener("scroll", requestTick);
+        });
+    })();
+
     // Scroll-triggered animations using Intersection Observer
     document.addEventListener("DOMContentLoaded", function () {
         const observerOptions = {

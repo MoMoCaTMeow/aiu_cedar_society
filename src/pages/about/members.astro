@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getMembers } from "../../library/microcms";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 
 // Fetch members
 const response = await getMembers();
@@ -28,12 +30,23 @@ const seo = {
     title: "メンバー紹介 | AIU Cedar Society",
     description:
         "AIU Cedar Societyを支えるメンバーたちを紹介します。代表をはじめ、企画・運営・広報など様々な役割でメンバーが活動しています。",
-    keywords: "AIU Cedar Society,メンバー,代表,運営メンバー,学生",
+    keywords: "AIU Cedar Society,メンバー紹介,学生,運営メンバー,チーム",
 };
+
+const breadcrumbItems = [
+    { label: "ホーム", href: "/" },
+    { label: "メンバー紹介" },
+];
 ---
 
 <Layout seo={seo}>
-    <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
+    <BreadcrumbSchema items={breadcrumbItems} />
+    <div class="relative min-h-screen">
+        {/* Background with gradient */}
+        <div
+            class="absolute inset-0 bg-gradient-to-br from-[#006837]/3 via-transparent to-gray-100/50 pointer-events-none"
+        >
+        </div>
         <div
             class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-5xl"
         >
@@ -59,6 +72,9 @@ const seo = {
 
             {/* Hero Section */}
             <div class="relative mb-12 md:mb-16">
+                <div class="relative">
+                    <Breadcrumb items={breadcrumbItems} />
+                </div>
                 <div class="relative mb-6">
                     <div class="absolute top-0 left-0 w-px h-full bg-[#006837]">
                     </div>
@@ -105,7 +121,7 @@ const seo = {
 
                         <div class="grid md:grid-cols-2 gap-6">
                             {currentMembers.map((member) => (
-                                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-[#006837] hover:shadow-md transition-shadow">
+                                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-[#006837] hover:shadow-md transition-shadow smooth-hover">
                                     <div class="flex items-start gap-4">
                                         {member.image ? (
                                             <img
@@ -184,7 +200,7 @@ const seo = {
 
                         <div class="grid md:grid-cols-2 gap-6">
                             {graduateMembers.map((member) => (
-                                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-gray-400 hover:shadow-md transition-shadow">
+                                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-gray-400 hover:shadow-md transition-shadow smooth-hover">
                                     <div class="flex items-start gap-4">
                                         {member.image ? (
                                             <img

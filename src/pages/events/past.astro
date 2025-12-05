@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getLectures } from "../../library/microcms";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 
 // Fetch all lectures (past events)
 const response = await getLectures({
@@ -41,13 +43,21 @@ const seo = {
         "AIU Cedar Societyがこれまでに開催した講演会のアーカイブ。芝屋市長 高島崚輔氏など、著名なゲストを招いた講演会の記録をご覧いただけます。",
     keywords: "AIU Cedar Society,過去の講演会,アーカイブ,開催履歴",
 };
+
+// Breadcrumb設定
+const breadcrumbItems = [
+    { label: "ホーム", href: "/" },
+    { label: "過去の講演会" },
+];
 ---
 
 <Layout seo={seo}>
+    <BreadcrumbSchema items={breadcrumbItems} />
     <div class="bg-gradient-to-b from-gray-50 to-white min-h-screen">
         <div
             class="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-12 md:pb-20 max-w-5xl"
         >
+            <Breadcrumb items={breadcrumbItems} />
             {/* Back Button */}
             <a
                 href="/"
@@ -171,12 +181,12 @@ const seo = {
                             {lecturesByYear[year].map((lecture) => (
                                 <a
                                     href={`/lectures/${lecture.id}`}
-                                    class="lecture-card-wrapper block group"
+                                    class="lecture-card-wrapper block group card-tilt smooth-hover"
                                     data-title={lecture.title}
                                     data-guest={lecture.guest_name}
                                     data-year={year.toString()}
                                 >
-                                    <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#006837] hover:border-opacity-30 transform hover:-translate-y-0.5">
+                                    <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#006837] hover:border-opacity-30">
                                         <div class="flex flex-row gap-0">
                                             {/* Image - モバイルでも横並び、サイズを小さく */}
                                             <div class="w-24 sm:w-32 md:w-48 flex-shrink-0 relative overflow-hidden bg-gray-100">
