@@ -200,6 +200,31 @@ const { seo = {} } = Astro.props;
             }
         </script>
         <style is:global>
+            /* ===== View Transitions API Enhancements ===== */
+            /* Shared elements for smooth transitions between pages */
+            h1,
+            .page-title {
+                view-transition-name: page-title;
+            }
+
+            .breadcrumb-nav {
+                view-transition-name: breadcrumb;
+            }
+
+            /* Prevent overflow during transitions */
+            ::view-transition-image-pair(*) {
+                overflow: hidden;
+            }
+
+            /* Enhanced motion sensitivity support */
+            @media (prefers-reduced-motion: reduce) {
+                ::view-transition-group(*),
+                ::view-transition-old(*),
+                ::view-transition-new(*) {
+                    animation: none !important;
+                }
+            }
+
             /* CSS Variables for Dark Mode */
             :root {
                 /* Legacy Dark Mode Variables (保持) */
@@ -748,6 +773,127 @@ const { seo = {} } = Astro.props;
                 will-change: transform;
             }
 
+            /* ===== CSS content-visibility for Performance ===== */
+            /* Dramatically improves rendering speed by skipping off-screen content */
+
+            .content-visibility-auto {
+                content-visibility: auto;
+                contain-intrinsic-size: 0 400px;
+            }
+
+            /* Member cards optimization */
+            .member-card {
+                content-visibility: auto;
+                contain-intrinsic-size: 0 350px;
+            }
+
+            /* Lecture cards optimization */
+            .lecture-card {
+                content-visibility: auto;
+                contain-intrinsic-size: 0 300px;
+            }
+
+            /* Shimmer loading effect for perceived performance */
+            @keyframes shimmer {
+                0% {
+                    background-position: -1000px 0;
+                }
+                100% {
+                    background-position: 1000px 0;
+                }
+            }
+
+            .skeleton {
+                background: linear-gradient(
+                    90deg,
+                    #f0f0f0 25%,
+                    #e0e0e0 50%,
+                    #f0f0f0 75%
+                );
+                background-size: 1000px 100%;
+                animation: shimmer 2s infinite linear;
+                border-radius: 4px;
+            }
+
+            [data-theme="dark"] .skeleton {
+                background: linear-gradient(
+                    90deg,
+                    #2a2a2a 25%,
+                    #1a1a1a 50%,
+                    #2a2a2a 75%
+                );
+                background-size: 1000px 100%;
+            }
+
+            img.loading {
+                background: linear-gradient(
+                    90deg,
+                    #f0f0f0 25%,
+                    #e0e0e0 50%,
+                    #f0f0f0 75%
+                );
+                background-size: 1000px 100%;
+                animation: shimmer 2s infinite;
+            }
+
+            /* ===== Micro-interactions Enhancement ===== */
+            /* Button feedback - subtle scale on click */
+            button,
+            .btn,
+            a.button {
+                transition:
+                    transform var(--transition-fast),
+                    box-shadow var(--transition-fast),
+                    background-color var(--transition-fast);
+            }
+
+            button:active,
+            .btn:active,
+            a.button:active {
+                transform: scale(0.98);
+            }
+
+            /* Enhanced link hover with underline animation */
+            a:not(.button):not(.btn) {
+                position: relative;
+                transition: color var(--transition-fast);
+            }
+
+            a:not(.button):not(.btn)::after {
+                content: "";
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: -2px;
+                left: 0;
+                background-color: currentColor;
+                transition: width var(--transition-base);
+            }
+
+            a:not(.button):not(.btn):hover::after {
+                width: 100%;
+            }
+
+            /* Smooth page scroll */
+            html {
+                scroll-behavior: smooth;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                html {
+                    scroll-behavior: auto;
+                }
+
+                button,
+                .btn,
+                a {
+                    transition: none !important;
+                }
+
+                a::after {
+                    transition: none !important;
+                }
+            }
             /* Remove will-change after interaction */
             @media (prefers-reduced-motion: reduce) {
                 .card-tilt,
@@ -1024,6 +1170,18 @@ const { seo = {} } = Astro.props;
                 </div>
             </div>
         </footer>
+
+        <!-- Performance Optimization Scripts -->
+        <script>
+            import { setupLazyLoading } from "../utils/lazyLoad";
+            import { measureWebVitals } from "../utils/webVitals";
+
+            // Initialize on page load (View Transitions compatible)
+            document.addEventListener("astro:page-load", () => {
+                setupLazyLoading();
+                measureWebVitals();
+            });
+        </script>
     </body>
 </html>
 

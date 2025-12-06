@@ -3,7 +3,7 @@
  * OptimizedImage - MicroCMS画像最適化コンポーネント
  *
  * MicroCMSの画像APIを利用して、適切なサイズとフォーマットに最適化された
- * 画像を表示します。WebP変換、リサイズ、srcset対応を自動で行います。
+ * 画像を表示します。AVIF/WebP変換、リサイズ、srcset対応を自動で行います。
  */
 interface Props {
     src: string;
@@ -33,30 +33,49 @@ const {
  * MicroCMS画像URLに最適化パラメータを追加
  * @param url - 元の画像URL
  * @param w - 幅（ピクセル）
+ * @param format - 画像フォーマット（webp or avif）
  * @param q - 品質（1-100）
  * @returns 最適化パラメータ付きURL
  */
-function getOptimizedUrl(url: string, w: number, q: number = quality): string {
+function getOptimizedUrl(
+    url: string,
+    w: number,
+    format: "webp" | "avif" = "webp",
+    q: number = quality,
+): string {
     const separator = url.includes("?") ? "&" : "?";
-    return `${url}${separator}w=${w}&fm=webp&q=${q}`;
+    return `${url}${separator}w=${w}&fm=${format}&q=${q}`;
 }
 
 // srcset生成（1x, 2x対応でRetinaディスプレイに最適化）
-const srcset = [
-    `${getOptimizedUrl(src, width)} 1x`,
-    `${getOptimizedUrl(src, width * 2)} 2x`,
+// AVIF優先、WebPフォールバック
+const srcsetAvif = [
+    `${getOptimizedUrl(src, width, "avif")} 1x`,
+    `${getOptimizedUrl(src, width * 2, "avif")} 2x`,
+].join(", ");
+
+const srcsetWebp = [
+    `${getOptimizedUrl(src, width, "webp")} 1x`,
+    `${getOptimizedUrl(src, width * 2, "webp")} 2x`,
 ].join(", ");
 ---
 
-<img
-    src={getOptimizedUrl(src, width)}
-    srcset={srcset}
-    alt={alt}
-    width={width}
-    height={height}
-    sizes={sizes}
-    class={className}
-    loading={loading}
-    fetchpriority={fetchpriority}
-    decoding="async"
-/>
+<picture>
+    <!-- AVIF - Best compression (20-30% smaller than WebP) -->
+    <source type="image/avif" srcset={srcsetAvif} sizes={sizes} />
+
+    <!-- WebP - Fallback for browsers without AVIF support -->
+    <source type="image/webp" srcset={srcsetWebp} sizes={sizes} />
+
+    <!-- Original format - Final fallback -->
+    <img
+        src={getOptimizedUrl(src, width, "webp")}
+        alt={alt}
+        width={width}
+        height={height}
+        class={className}
+        loading={loading}
+        fetchpriority={fetchpriority}
+        decoding="async"
+    />
+</picture>
