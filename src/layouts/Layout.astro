@@ -1044,54 +1044,6 @@ const { seo = {} } = Astro.props;
             </div>
         </header>
 
-        <!-- Feedback Button (Staging) -->
-        <a
-            href="https://forms.gle/pst2kQJxtYF4eTND8"
-            target="_blank"
-            rel="noopener noreferrer"
-            id="feedback-button"
-            class="fixed bottom-24 right-6 bg-white dark:bg-gray-800 text-[#006837] dark:text-green-400 border-2 border-[#006837] dark:border-green-400 rounded-full shadow-lg hover:shadow-xl hover:bg-[#006837] hover:text-white dark:hover:bg-green-400 dark:hover:text-gray-900 transition-all duration-300 z-50 flex items-center gap-3 px-5 py-3 hover:scale-105 group"
-            aria-label="フィードバックを送る"
-        >
-            <svg
-                class="w-5 h-5 group-hover:rotate-12 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                ></path>
-            </svg>
-            <span class="font-bold text-sm whitespace-nowrap"
-                >フィードバック</span
-            >
-        </a>
-
-        <!-- Back to Top Button -->
-        <a
-            href="#top"
-            id="back-to-top"
-            class="fixed bottom-6 right-6 w-12 h-12 bg-[#006837] text-white rounded-full flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-[#005028] shadow-lg hover:shadow-xl z-50"
-            aria-label="トップに戻る"
-        >
-            <svg
-                class="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2.5"
-                    d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-            </svg>
-        </a>
-
         <main class="flex-grow pt-24" id="top">
             <slot />
         </main>
@@ -1170,6 +1122,56 @@ const { seo = {} } = Astro.props;
                 </div>
             </div>
         </footer>
+
+        <!-- Feedback Button (Test Operation) -->
+        <a
+            href="https://forms.gle/K2D9X2E7Ji4RBMZ57"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="feedback-button"
+            style="position: fixed !important; bottom: 6rem !important; right: 1.5rem !important; z-index: 50 !important;"
+            class="bg-white dark:bg-gray-800 text-[#006837] dark:text-green-400 border-2 border-[#006837] dark:border-green-400 rounded-full shadow-lg hover:shadow-xl hover:bg-[#006837] hover:text-white dark:hover:bg-green-400 dark:hover:text-gray-900 transition-all duration-300 flex items-center gap-3 px-5 py-3 hover:scale-105 group"
+            aria-label="フィードバックを送る"
+        >
+            <svg
+                class="w-5 h-5 group-hover:rotate-12 transition-transform"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                ></path>
+            </svg>
+            <span class="font-bold text-sm whitespace-nowrap"
+                >フィードバック</span
+            >
+        </a>
+
+        <!-- Back to Top Button -->
+        <a
+            href="#top"
+            id="back-to-top"
+            style="position: fixed !important; bottom: 1.5rem !important; right: 1.5rem !important; z-index: 50 !important;"
+            class="w-12 h-12 bg-[#006837] text-white rounded-full flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-[#005028] shadow-lg hover:shadow-xl"
+            aria-label="トップに戻る"
+        >
+            <svg
+                class="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+            </svg>
+        </a>
 
         <!-- Performance Optimization Scripts -->
         <script>
