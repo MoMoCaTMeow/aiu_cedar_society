@@ -911,7 +911,7 @@ const { seo = {} } = Astro.props;
         class="bg-gray-50 text-[#333333] font-sans antialiased min-h-screen flex flex-col tracking-wide font-normal selection:bg-[#006837] selection:text-white relative"
     >
         <header
-            class="py-4 md:py-8 px-4 md:px-6 lg:px-12 fixed w-full top-0 z-50 transition-all duration-300 bg-gray-50/95 backdrop-blur-md border-b border-gray-200/50"
+            class="py-3 md:py-8 px-4 md:px-6 lg:px-12 fixed w-full top-0 z-50 transition-all duration-300 bg-gray-50/95 backdrop-blur-md border-b border-gray-200/50"
         >
             <div
                 class="container mx-auto max-w-6xl flex justify-between items-center"
@@ -922,11 +922,34 @@ const { seo = {} } = Astro.props;
                 >
                     AIU Cedar Society
                 </a>
-                <nav class="flex items-center gap-2 md:gap-4">
+
+                {/* Mobile Hamburger Button */}
+                <button
+                    id="mobile-menu-button"
+                    class="md:hidden text-gray-900 hover:text-[#006837] transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    aria-label="メニューを開く"
+                    aria-expanded="false"
+                >
+                    <svg
+                        class="w-6 h-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                {/* Desktop Navigation */}
+                <nav class="hidden md:flex items-center gap-4">
                     {/* About Dropdown */}
                     <div class="relative dropdown-container">
                         <button
-                            class="dropdown-button text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3 gap-1"
+                            class="dropdown-button text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-3 gap-1"
                         >
                             ABOUT
                             <svg
@@ -966,7 +989,7 @@ const { seo = {} } = Astro.props;
                     {/* Events Dropdown */}
                     <div class="relative dropdown-container">
                         <button
-                            class="dropdown-button text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3 gap-1"
+                            class="dropdown-button text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-3 gap-1"
                         >
                             EVENTS
                             <svg
@@ -1001,21 +1024,21 @@ const { seo = {} } = Astro.props;
                     {/* Media Link */}
                     <a
                         href="/media"
-                        class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3"
+                        class="text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-3"
                         >MEDIA</a
                     >
 
                     {/* Contact Link */}
                     <a
                         href="/contact"
-                        class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3"
+                        class="text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-3"
                         >CONTACT</a
                     >
 
                     {/* Dark Mode Toggle */}
                     <button
                         id="theme-toggle"
-                        class="text-xs md:text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-2 md:px-3"
+                        class="text-sm font-medium text-gray-600 hover:text-[#006837] transition-colors tracking-wider min-h-[44px] flex items-center px-3"
                         aria-label="ダークモード切替"
                     >
                         <svg
@@ -1043,6 +1066,119 @@ const { seo = {} } = Astro.props;
                 </nav>
             </div>
         </header>
+
+        {/* Mobile Menu Overlay - Outside header for proper z-index */}
+        <div
+            id="mobile-menu-overlay"
+            class="fixed inset-0 bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 md:hidden"
+            style="z-index: 9998 !important;"
+            aria-hidden="true"
+        >
+        </div>
+
+        {
+            /* Mobile Menu - Semi-transparent with background interaction enabled */
+        }
+        <nav
+            id="mobile-menu"
+            class="fixed top-0 right-0 h-full w-64 max-w-[75vw] bg-white/30 backdrop-blur-2xl shadow-xl transform translate-x-full transition-all duration-300 ease-out md:hidden overflow-y-auto border-l border-white/20"
+            style="z-index: 9999 !important; pointer-events: auto; backdrop-filter: blur(40px) saturate(180%);"
+            aria-label="モバイルメニュー"
+        >
+            <div class="p-6">
+                {/* Close Button */}
+                <div class="flex justify-end mb-6">
+                    <button
+                        id="mobile-menu-close"
+                        class="text-gray-900 hover:text-[#006837] transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg hover:bg-white/80"
+                        aria-label="メニューを閉じる"
+                    >
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                {/* Mobile Menu Header */}
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-gray-900 tracking-tight">
+                        AIU Cedar Society
+                    </h2>
+                    <p class="text-xs text-gray-600 mt-1">
+                        秋田とAIU生の可能性をつなぐ
+                    </p>
+                </div>
+
+                {/* Mobile Menu Items */}
+                <div class="space-y-2">
+                    {/* About Section */}
+                    <div class="mb-6">
+                        <p class="text-sm font-bold text-gray-700 mb-3 px-3">
+                            About
+                        </p>
+                        <div class="space-y-1">
+                            <a
+                                href="/about"
+                                class="block py-3 px-4 text-base text-gray-700 hover:bg-white/90 hover:text-[#006837] transition-all rounded-lg border border-transparent hover:border-gray-300 hover:shadow-sm"
+                                >私たちについて</a
+                            >
+                            <a
+                                href="/about/history"
+                                class="block py-3 px-4 text-base text-gray-700 hover:bg-white/90 hover:text-[#006837] transition-all rounded-lg border border-transparent hover:border-gray-300 hover:shadow-sm"
+                                >設立の経緯</a
+                            >
+                            <a
+                                href="/about/members"
+                                class="block py-3 px-4 text-base text-gray-700 hover:bg-white/90 hover:text-[#006837] transition-all rounded-lg border border-transparent hover:border-gray-300 hover:shadow-sm"
+                                >メンバー紹介</a
+                            >
+                        </div>
+                    </div>
+
+                    {/* Events Section */}
+                    <div class="mb-6">
+                        <p class="text-sm font-bold text-gray-700 mb-3 px-3">
+                            Events
+                        </p>
+                        <div class="space-y-1">
+                            <a
+                                href="/events/upcoming"
+                                class="block py-3 px-4 text-base text-gray-700 hover:bg-white/90 hover:text-[#006837] transition-all rounded-lg border border-transparent hover:border-gray-300 hover:shadow-sm"
+                                >今後の予定</a
+                            >
+                            <a
+                                href="/events/past"
+                                class="block py-3 px-4 text-base text-gray-700 hover:bg-white/90 hover:text-[#006837] transition-all rounded-lg border border-transparent hover:border-gray-300 hover:shadow-sm"
+                                >過去の講演会</a
+                            >
+                        </div>
+                    </div>
+
+                    {/* Other Links */}
+                    <div class="space-y-1 pt-4 border-t border-white/30">
+                        <a
+                            href="/media"
+                            class="block py-3 px-4 text-base font-medium text-gray-700 hover:bg-white/90 hover:text-[#006837] transition-all rounded-lg border border-transparent hover:border-gray-300 hover:shadow-sm"
+                            >メディア掲載</a
+                        >
+                        <a
+                            href="/contact"
+                            class="block py-3 px-4 text-base font-medium text-gray-700 hover:bg-white/90 hover:text-[#006837] transition-all rounded-lg border border-transparent hover:border-gray-300 hover:shadow-sm"
+                            >お問い合わせ</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </nav>
 
         <main class="flex-grow pt-24" id="top">
             <slot />
@@ -1221,8 +1357,12 @@ const { seo = {} } = Astro.props;
     // Dark Mode Toggle with localStorage (View Transitions Compatible)
     function initThemeToggle() {
         const themeToggle = document.getElementById("theme-toggle");
+        const themeToggleMobile = document.getElementById(
+            "theme-toggle-mobile",
+        );
         const lightIcon = document.getElementById("theme-toggle-light-icon");
         const darkIcon = document.getElementById("theme-toggle-dark-icon");
+        const mobileIcon = document.getElementById("theme-toggle-mobile-icon");
         const html = document.documentElement;
 
         // Check for saved theme preference or default to light mode
@@ -1230,44 +1370,135 @@ const { seo = {} } = Astro.props;
 
         // Apply theme on load
         if (currentTheme === "dark") {
-            html.setAttribute("data-theme", "dark");
-            lightIcon?.classList.add("hidden");
-            darkIcon?.classList.remove("hidden");
+            html.classList.add("dark");
+            if (lightIcon) lightIcon.classList.add("hidden");
+            if (darkIcon) darkIcon.classList.remove("hidden");
         } else {
-            html.setAttribute("data-theme", "light");
-            lightIcon?.classList.remove("hidden");
-            darkIcon?.classList.add("hidden");
+            html.classList.remove("dark");
+            if (darkIcon) darkIcon.classList.add("hidden");
+            if (lightIcon) lightIcon.classList.remove("hidden");
         }
 
-        // Remove existing listener to prevent duplicates
-        if (themeToggle) {
-            themeToggle.replaceWith(themeToggle.cloneNode(true));
-            const newToggle = document.getElementById("theme-toggle");
-
-            // Toggle theme
-            newToggle?.addEventListener("click", function () {
-                const theme = html.getAttribute("data-theme");
-
-                if (theme === "dark") {
-                    html.setAttribute("data-theme", "light");
-                    localStorage.setItem("theme", "light");
-                    lightIcon?.classList.remove("hidden");
-                    darkIcon?.classList.add("hidden");
-                } else {
-                    html.setAttribute("data-theme", "dark");
-                    localStorage.setItem("theme", "dark");
-                    lightIcon?.classList.add("hidden");
-                    darkIcon?.classList.remove("hidden");
+        // Toggle theme function
+        function toggleTheme() {
+            if (html.classList.contains("dark")) {
+                html.classList.remove("dark");
+                localStorage.setItem("theme", "light");
+                if (lightIcon) lightIcon.classList.remove("hidden");
+                if (darkIcon) darkIcon.classList.add("hidden");
+                if (mobileIcon) {
+                    mobileIcon.innerHTML =
+                        '<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8 0 1010.586 10.586z"></path>';
                 }
-            });
+            } else {
+                html.classList.add("dark");
+                localStorage.setItem("theme", "dark");
+                if (lightIcon) lightIcon.classList.add("hidden");
+                if (darkIcon) darkIcon.classList.remove("hidden");
+                if (mobileIcon) {
+                    mobileIcon.innerHTML =
+                        '<path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>';
+                }
+            }
+        }
+
+        // Add event listeners
+        if (themeToggle) {
+            themeToggle.addEventListener("click", toggleTheme);
+        }
+        if (themeToggleMobile) {
+            themeToggleMobile.addEventListener("click", toggleTheme);
         }
     }
 
-    // Initialize on first page load
+    // Mobile Menu Toggle
+    function initMobileMenu() {
+        const menuButton = document.getElementById("mobile-menu-button");
+        const menuClose = document.getElementById("mobile-menu-close");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        if (!menuButton || !mobileMenu) {
+            console.log("Mobile menu elements not found");
+            return;
+        }
+
+        // Remove any existing click handlers by cloning nodes
+        const newMenuButton = menuButton.cloneNode(true);
+        menuButton.parentNode?.replaceChild(newMenuButton, menuButton);
+
+        const newMenuClose = menuClose?.cloneNode(true);
+        if (menuClose && newMenuClose) {
+            menuClose.parentNode?.replaceChild(newMenuClose, menuClose);
+        }
+
+        // Get fresh references
+        const freshMenuButton = document.getElementById("mobile-menu-button");
+        const freshMenuClose = document.getElementById("mobile-menu-close");
+        const freshMobileMenu = document.getElementById("mobile-menu");
+
+        function openMenu() {
+            console.log("Opening mobile menu");
+            if (freshMobileMenu) {
+                freshMobileMenu.classList.remove("translate-x-full");
+                freshMobileMenu.classList.add("translate-x-0");
+                if (freshMenuButton)
+                    freshMenuButton.setAttribute("aria-expanded", "true");
+            }
+        }
+
+        function closeMenu() {
+            console.log("Closing mobile menu");
+            if (freshMobileMenu) {
+                freshMobileMenu.classList.remove("translate-x-0");
+                freshMobileMenu.classList.add("translate-x-full");
+                if (freshMenuButton)
+                    freshMenuButton.setAttribute("aria-expanded", "false");
+            }
+        }
+
+        // Event listeners
+        if (freshMenuButton) {
+            freshMenuButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openMenu();
+            });
+            console.log("Mobile menu button listener attached");
+        }
+        if (freshMenuClose) {
+            freshMenuClose.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeMenu();
+            });
+        }
+
+        // Close menu on link click
+        const menuLinks = freshMobileMenu?.querySelectorAll("a");
+        menuLinks?.forEach((link) => {
+            link.addEventListener("click", () => {
+                setTimeout(closeMenu, 100);
+            });
+        });
+
+        // Close on escape key
+        const escapeHandler = (e) => {
+            if (e.key === "Escape") {
+                closeMenu();
+            }
+        };
+        document.removeEventListener("keydown", escapeHandler);
+        document.addEventListener("keydown", escapeHandler);
+    }
+
     initThemeToggle();
+    initMobileMenu();
 
     // Re-initialize after View Transitions page swap
-    document.addEventListener("astro:page-load", initThemeToggle);
+    document.addEventListener("astro:page-load", () => {
+        initThemeToggle();
+        initMobileMenu();
+    });
 
     // Dropdown Menu Functionality
     document.addEventListener("DOMContentLoaded", function () {
