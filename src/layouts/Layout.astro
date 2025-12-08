@@ -42,36 +42,56 @@ const { seo = {} } = Astro.props;
 
         <!-- DNS Prefetch for faster resolution -->
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="dns-prefetch" href="https://images.microcms-assets.io" />
 
-        <!-- Preconnect for critical origins -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <!-- Preconnect for critical origins (fonts deferred to end) -->
         <link
             rel="preconnect"
             href="https://images.microcms-assets.io"
             crossorigin
         />
 
-        <!-- 
-            Google Fonts Optimization:
-            - Using text= parameter to subset only needed characters (reduces 89KB to ~5KB)
-            - Using font-display=swap for better FCP
-            - Only loading weights actually used
-        -->
-        <link
-            rel="preload"
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
-            as="style"
-            onload="this.onload=null;this.rel='stylesheet'"
-        />
-        <noscript>
-            <link
-                href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
-                rel="stylesheet"
-            />
-        </noscript>
+        <!-- Critical CSS Inline for instant render -->
+        <style>
+            /* Critical above-the-fold styles */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html {
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                    "Helvetica Neue", Arial, sans-serif;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            body {
+                background-color: #f9fafb;
+                color: #333333;
+                min-height: 100vh;
+                line-height: 1.75;
+            }
+
+            /* Header critical styles */
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 50;
+                background-color: rgba(249, 250, 251, 0.95);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+            }
+            /* Critical above-the-fold container */
+            .container {
+                max-width: 72rem;
+                margin: 0 auto;
+                padding: 0 1rem;
+            }
+        </style>
 
         <!-- NProgress Styles (inline for fast loading) -->
         <style>
@@ -100,49 +120,38 @@ const { seo = {} } = Astro.props;
                 opacity: 1;
                 transform: rotate(3deg) translate(0px, -4px);
             }
-        </style>
-
-        <!-- Critical CSS for above-the-fold content - reduces FCP -->
-        <style>
-            /* System font stack as fallback for immediate rendering */
-            body {
-                font-family:
-                    -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo",
-                    sans-serif;
-                margin: 0;
-                background-color: #f9fafb;
-            }
-            /* Prevent layout shift when custom font loads */
-            .font-sans {
-                font-family:
-                    -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo",
-                    sans-serif;
-            }
-            /* When Noto Sans JP is loaded, apply it */
-            .fonts-loaded body,
-            .fonts-loaded .font-sans {
-                font-family:
-                    "Noto Sans JP",
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    sans-serif;
-            }
-            /* Critical header styles */
-            header {
+            #nprogress .spinner {
+                display: block;
                 position: fixed;
-                width: 100%;
-                top: 0;
-                z-index: 50;
-                background: rgba(249, 250, 251, 0.95);
-                backdrop-filter: blur(12px);
+                z-index: 9999;
+                top: 15px;
+                right: 15px;
             }
-            /* Critical above-the-fold container */
-            .container {
-                max-width: 72rem;
-                margin: 0 auto;
-                padding: 0 1rem;
+            #nprogress .spinner-icon {
+                width: 18px;
+                height: 18px;
+                box-sizing: border-box;
+                border: solid 2px transparent;
+                border-top-color: #006837;
+                border-left-color: #006837;
+                border-radius: 50%;
+                animation: nprogress-spinner 400ms linear infinite;
+            }
+            .nprogress-custom-parent {
+                overflow: hidden;
+                position: relative;
+            }
+            .nprogress-custom-parent #nprogress .spinner,
+            .nprogress-custom-parent #nprogress .bar {
+                position: absolute;
+            }
+            @keyframes nprogress-spinner {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
             }
         </style>
 
